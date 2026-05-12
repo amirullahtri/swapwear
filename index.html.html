@@ -4,501 +4,700 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <title>SWAPWEAR — Airbnb untuk Lemarimu</title>
-<meta name="description" content="Platform P2P fashion rental pertama Indonesia. Sewakan baju yang jarang dipakai, atau sewa outfit impian 10-20% dari harga beli."/>
 <meta name="theme-color" content="#0D0B1F"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --pink:#FF1F6E;--navy:#0D0B1F;--navy2:#120F2B;--lime:#C8FF00;
-  --pink-light:rgba(255,31,110,.12);--pink-mid:#FFB3CC;
-  --border:rgba(255,255,255,.08);--text-muted:rgba(255,255,255,.45);
-  --card-bg:rgba(255,255,255,.04);
-}
+:root{--pk:#FF1F6E;--nv:#0D0B1F;--nv2:#120F2B;--lm:#C8FF00;--bd:rgba(255,255,255,.08);--muted:rgba(255,255,255,.45);--card:rgba(255,255,255,.04)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--navy);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer}
-input,select,textarea{font-family:'Plus Jakarta Sans',sans-serif}
-.hidden{display:none!important}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-
-/* ── LAYOUT ── */
-.app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;background:var(--navy);box-shadow:0 0 60px rgba(0,0,0,.5)}
-.page{display:none;padding-bottom:80px}
-.page.active{display:block}
-
-/* ── TOPBAR ── */
-.topbar{position:sticky;top:0;z-index:50;background:rgba(13,11,31,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
-.logo{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;cursor:pointer}.logo span{color:var(--pink)}
-.topbar-actions{display:flex;align-items:center;gap:.6rem}
-.btn-icon{background:transparent;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .2s}
-.btn-icon:hover{border-color:var(--pink);background:var(--pink-light)}
-.avatar-sm{width:32px;height:32px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.75rem;font-weight:800;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
-.avatar-sm:hover{border-color:var(--pink-mid)}
-
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(13,11,31,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;z-index:50;padding:.5rem 0 .75rem}
-.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;font-size:.6rem;font-weight:600;color:var(--text-muted);cursor:pointer;padding:.3rem;transition:color .2s}
-.bn-item.active{color:var(--pink)}
-.bn-icon{font-size:1.2rem;line-height:1}
-.bn-plus{background:var(--pink);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-top:-12px;box-shadow:0 4px 16px rgba(255,31,110,.4)}
-
-/* ── BUTTONS ── */
-.btn-primary{background:var(--pink);color:#fff;border:none;padding:.8rem 1.5rem;border-radius:100px;font-size:.9rem;font-weight:600;width:100%;transition:all .2s}
-.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
-.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:.8rem 1.5rem;border-radius:100px;font-size:.9rem;font-weight:600;width:100%;transition:all .2s}
-.btn-outline:hover{border-color:rgba(255,255,255,.5)}
-.btn-sm{padding:.45rem 1rem;border-radius:100px;font-size:.78rem;font-weight:600;border:none}
-.btn-pink-sm{background:var(--pink);color:#fff}
-.btn-ghost-sm{background:transparent;border:1px solid var(--border);color:var(--text-muted)}
-
-/* ── CARDS ── */
-.card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.card-pad{padding:1rem 1.25rem}
-
-/* ── BADGE ── */
+html,body{background:var(--nv);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--nv);position:relative;box-shadow:0 0 60px rgba(0,0,0,.5)}
+.page{display:none;padding-bottom:80px}.page.active{display:block}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(13,11,31,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);padding:.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.logo{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;cursor:pointer}.logo span{color:var(--pk)}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(13,11,31,.97);backdrop-filter:blur(10px);border-top:1px solid var(--bd);display:flex;z-index:50;padding:.5rem 0 .75rem}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;font-size:.58rem;font-weight:600;color:var(--muted);cursor:pointer;padding:.3rem;transition:color .2s}
+.bn-item.active{color:var(--pk)}
+.bn-icon{font-size:1.15rem;line-height:1}
+.bn-plus{background:var(--pk);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-top:-12px;box-shadow:0 4px 16px rgba(255,31,110,.4)}
+.btn-primary{background:var(--pk);color:#fff;border:none;padding:.8rem 1.5rem;border-radius:100px;font-size:.9rem;font-weight:600;width:100%;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.btn-primary:hover{opacity:.88}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:.8rem 1.5rem;border-radius:100px;font-size:.9rem;font-weight:600;width:100%;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
 .badge{display:inline-block;padding:.2rem .6rem;border-radius:100px;font-size:.68rem;font-weight:600}
-.badge-pink{background:var(--pink-light);color:var(--pink)}
-.badge-lime{background:rgba(200,255,0,.12);color:var(--lime)}
-.badge-gray{background:rgba(255,255,255,.08);color:var(--text-muted)}
-.badge-green{background:rgba(16,185,129,.12);color:#6EE7B7}
+.badge-pk{background:rgba(255,31,110,.15);color:var(--pk)}
+.badge-lm{background:rgba(200,255,0,.12);color:var(--lm)}
+.badge-gy{background:rgba(255,255,255,.08);color:var(--muted)}
+.input{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:12px;padding:.75rem 1rem;color:#fff;font-size:.9rem;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.input::placeholder{color:var(--muted)}
+.input:focus{border-color:var(--pk)}
+.input-label{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:.35rem;display:block}
+.section-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pk);margin-bottom:.6rem}
+.empty{text-align:center;padding:3rem 1.5rem}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1A1730;border:1px solid var(--bd);border-radius:100px;padding:.65rem 1.25rem;font-size:.82rem;font-weight:600;color:#fff;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:90vw}
+.toast.show{opacity:1}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:var(--nv2);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:1.75rem 1.5rem 2.5rem;border-top:1px solid var(--bd);animation:slideUp .3s ease;max-height:90vh;overflow-y:auto}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:100px;margin:0 auto 1.25rem}
+.form-group{margin-bottom:.85rem}
+.auth-tab{flex:1;padding:.5rem;border-radius:100px;border:1px solid var(--bd);background:transparent;color:var(--muted);font-size:.82rem;font-weight:600;transition:all .2s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.auth-tab.active{background:var(--pk);color:#fff;border-color:var(--pk)}
 
-/* ── SECTION TITLE ── */
-.section-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:.6rem}
-.section-h{font-family:'Syne',sans-serif;font-weight:800;line-height:1.1}
-
-/* ── INPUT ── */
-.input{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:12px;padding:.75rem 1rem;color:#fff;font-size:.9rem;outline:none;transition:border-color .2s}
-.input::placeholder{color:var(--text-muted)}
-.input:focus{border-color:var(--pink)}
-.input-label{font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:.35rem;display:block}
-
-/* ═══════════════════════════════════════
-   PAGE: LANDING
-═══════════════════════════════════════ */
+/* ── HERO ── */
 .hero{padding:2.5rem 1.5rem 2rem;text-align:center}
-.hero-badge{display:inline-block;background:var(--pink-light);color:var(--pink-mid);border:1px solid rgba(255,31,110,.25);padding:.3rem .85rem;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.25rem}
-.hero h1{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:.95;margin-bottom:1.25rem}
-.hero h1 em{color:var(--pink);font-style:normal}
+.hero-badge{display:inline-block;background:rgba(255,31,110,.12);color:#FFB3CC;border:1px solid rgba(255,31,110,.2);padding:.3rem .85rem;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.25rem}
+.hero h1{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;line-height:.95;margin-bottom:1.25rem}
+.hero h1 em{color:var(--pk);font-style:normal}
 .hero-sub{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:2rem}
 .hero-btns{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:0 1.5rem}
-.hstat{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:.85rem;text-align:center}
-.hstat-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--lime);display:block}
-.hstat-lbl{font-size:.68rem;color:var(--text-muted);margin-top:.15rem}
-
+.hstat{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:.85rem;text-align:center}
+.hstat-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--lm);display:block}
+.hstat-lbl{font-size:.68rem;color:var(--muted);margin-top:.15rem}
 .how-section{padding:2rem 1.5rem}
-.how-steps{display:flex;flex-direction:column;gap:.75rem;margin-top:1.25rem}
-.how-step{display:flex;align-items:flex-start;gap:.85rem}
-.how-num{width:34px;height:34px;border-radius:50%;background:var(--pink);font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.how-step{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:.85rem}
+.how-num{width:34px;height:34px;border-radius:50%;background:var(--pk);font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .how-text h4{font-weight:600;font-size:.9rem;margin-bottom:.2rem}
-.how-text p{font-size:.8rem;color:var(--text-muted);line-height:1.5}
-
-.waitlist-section{margin:1.5rem;background:var(--pink-light);border:1px solid rgba(255,31,110,.2);border-radius:20px;padding:1.75rem 1.25rem;text-align:center}
-.waitlist-section h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.4rem}
-.waitlist-section p{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem}
+.how-text p{font-size:.8rem;color:var(--muted);line-height:1.5}
+.wl-section{margin:1.5rem;background:rgba(255,31,110,.08);border:1px solid rgba(255,31,110,.18);border-radius:20px;padding:1.75rem 1.25rem;text-align:center}
 .wl-toggle{display:flex;gap:.4rem;margin-bottom:1rem;justify-content:center}
-.wl-tb{padding:.4rem 1rem;border-radius:100px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.4);font-size:.8rem;font-weight:600;transition:all .2s}
-.wl-tb.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+.wl-tb{padding:.4rem 1rem;border-radius:100px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.4);font-size:.8rem;font-weight:600;transition:all .2s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.wl-tb.active{background:var(--pk);color:#fff;border-color:var(--pk)}
 .wl-form{display:flex;flex-direction:column;gap:.6rem}
-.wl-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:.7rem 1rem;color:#fff;font-size:.85rem;outline:none;text-align:center}
+.wl-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:.7rem 1rem;color:#fff;font-size:.85rem;outline:none;text-align:center;font-family:'Plus Jakarta Sans',sans-serif}
 .wl-input::placeholder{color:rgba(255,255,255,.3)}
-.wl-input:focus{border-color:var(--pink)}
-.wl-success{background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.25);color:var(--lime);border-radius:12px;padding:.75rem;font-size:.82rem;font-weight:600;margin-top:.5rem;display:none}
-.wl-count{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:.6rem}
+.wl-input:focus{border-color:var(--pk)}
+.wl-success{background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.25);color:var(--lm);border-radius:12px;padding:.75rem;font-size:.82rem;font-weight:600;margin-top:.5rem;display:none}
 
-/* ═══════════════════════════════════════
-   PAGE: BROWSE
-═══════════════════════════════════════ */
-.browse-search{padding:.75rem 1.25rem}
-.search-bar{background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:100px;padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-muted);font-size:.85rem;cursor:text}
-.search-bar input{background:transparent;border:none;outline:none;color:#fff;font-size:.85rem;width:100%}
-.search-bar input::placeholder{color:var(--text-muted)}
+/* ── BROWSE ── */
 .cats-scroll{display:flex;gap:.4rem;padding:.25rem 1.25rem .75rem;overflow-x:auto;scrollbar-width:none}
 .cats-scroll::-webkit-scrollbar{display:none}
-.cat-btn{padding:.35rem .85rem;border-radius:100px;font-size:.75rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--text-muted);white-space:nowrap;transition:all .2s}
-.cat-btn.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+.cat-btn{padding:.35rem .85rem;border-radius:100px;font-size:.75rem;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--muted);white-space:nowrap;transition:all .2s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.cat-btn.active{background:var(--pk);color:#fff;border-color:var(--pk)}
 .items-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;padding:0 1.25rem}
-.item-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+.item-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .2s}
 .item-card:hover{border-color:rgba(255,31,110,.4);transform:translateY(-2px)}
 .item-thumb{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.75rem;position:relative}
-.item-thumb-bg-pink{background:rgba(255,31,110,.1)}
-.item-thumb-bg-purple{background:rgba(139,92,246,.1)}
-.item-thumb-bg-teal{background:rgba(20,184,166,.1)}
-.item-thumb-bg-amber{background:rgba(245,158,11,.1)}
-.item-hbadge{position:absolute;top:.4rem;left:.4rem;font-size:.58rem;font-weight:700;padding:.15rem .45rem;border-radius:4px}
-.item-hbadge.hot{background:var(--pink);color:#fff}
-.item-hbadge.new{background:var(--lime);color:#0D0B1F}
 .item-body{padding:.65rem .75rem}
 .item-name{font-size:.8rem;font-weight:600;margin-bottom:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item-price{font-size:.75rem;color:var(--pink);font-weight:600}
-.item-meta{font-size:.65rem;color:var(--text-muted);margin-top:.1rem}
-.item-lender-row{display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
-.lender-dot{width:16px;height:16px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:800}
+.item-price{font-size:.75rem;color:var(--pk);font-weight:600}
+.item-meta{font-size:.65rem;color:var(--muted);margin-top:.1rem}
+.item-hbadge{position:absolute;top:.4rem;left:.4rem;font-size:.58rem;font-weight:700;padding:.15rem .45rem;border-radius:4px}
+.hot-b{background:var(--pk);color:#fff}
+.new-b{background:var(--lm);color:#0D0B1F}
 
-/* ═══════════════════════════════════════
-   PAGE: DETAIL
-═══════════════════════════════════════ */
-.detail-back{padding:.75rem 1.25rem;display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer}
-.detail-back:hover{color:#fff}
-.detail-hero{height:200px;display:flex;align-items:center;justify-content:center;font-size:6rem;position:relative}
-.detail-fav{position:absolute;top:.75rem;right:1rem;font-size:1.25rem;cursor:pointer;background:rgba(0,0,0,.3);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+/* ── DETAIL ── */
+.detail-hero{height:200px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative}
 .detail-body{padding:1.25rem}
-.detail-cat{margin-bottom:.5rem}
 .detail-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
-.detail-lender-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
-.detail-rating{font-size:.78rem;color:var(--lime);font-weight:600}
-.detail-reviews{font-size:.72rem;color:var(--text-muted)}
-.detail-desc{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:1rem}
-.detail-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.25rem}
-.dinfo{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.6rem .75rem}
-.dinfo-label{font-size:.62rem;color:var(--text-muted);margin-bottom:.15rem;text-transform:uppercase;letter-spacing:.05em}
-.dinfo-val{font-size:.82rem;font-weight:600}
-.dur-label{font-size:.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
-.dur-opts{display:flex;gap:.5rem;margin-bottom:1.25rem}
-.dur-opt{flex:1;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:.72rem;text-align:center;cursor:pointer;transition:all .2s}
+.dur-opt{flex:1;padding:.6rem;border-radius:10px;border:1px solid var(--bd);background:transparent;color:var(--muted);font-size:.72rem;text-align:center;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
 .dur-opt b{display:block;font-size:.82rem;margin-top:.1rem}
-.dur-opt.active{background:var(--pink-light);border-color:var(--pink);color:#fff}
-.detail-price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
-.detail-price{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--lime)}
-.detail-orig{font-size:.75rem;color:var(--text-muted);text-decoration:line-through}
-.detail-saving{font-size:.72rem;color:var(--pink);font-weight:600}
-.detail-delivery{font-size:.75rem;color:var(--text-muted);margin-bottom:1.25rem}
-.detail-cta-row{display:flex;gap:.65rem}
-.btn-fav{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:.8rem;font-size:1rem}
-
-/* ═══════════════════════════════════════
-   PAGE: BOOKING CONFIRM
-═══════════════════════════════════════ */
-.confirm-wrap{padding:2rem 1.5rem;text-align:center;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.confirm-icon{font-size:4rem;margin-bottom:1rem}
-.confirm-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.4rem}
-.confirm-sub{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:1.5rem}
-.confirm-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.25rem;width:100%;text-align:left;margin-bottom:1.25rem}
-.confirm-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.dur-opt.active{background:rgba(255,31,110,.15);border-color:var(--pk);color:#fff}
+.confirm-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--bd);font-size:.82rem}
 .confirm-row:last-child{border-bottom:none}
-.cr-key{color:var(--text-muted)}
-.cr-val{font-weight:600;text-align:right}
-.cr-total{color:var(--lime);font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}
-.confirm-btns{display:flex;flex-direction:column;gap:.6rem;width:100%}
 
-/* ═══════════════════════════════════════
-   PAGE: LENDER DASHBOARD
-═══════════════════════════════════════ */
-.ld-welcome{padding:1.25rem 1.25rem .5rem}
-.ld-hi{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800}
-.ld-sub{font-size:.78rem;color:var(--text-muted);margin-top:.15rem}
-.ld-stats-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:.75rem 1.25rem}
-.ld-stat{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:.85rem}
+/* ── LENDER DASHBOARD ── */
+.ld-tab{padding:.65rem .85rem;font-size:.78rem;font-weight:600;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.ld-tab.active{color:var(--pk);border-bottom-color:var(--pk)}
+.ld-stat{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:.85rem}
 .ld-stat-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;display:block;line-height:1}
-.ld-stat-val.lime{color:var(--lime)}
-.ld-stat-val.pink{color:var(--pink)}
-.ld-stat-lbl{font-size:.68rem;color:var(--text-muted);margin-top:.25rem;display:block}
-.ld-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 1.25rem;gap:.25rem;overflow-x:auto;scrollbar-width:none}
-.ld-tabs::-webkit-scrollbar{display:none}
-.ld-tab{padding:.65rem .85rem;font-size:.78rem;font-weight:600;color:var(--text-muted);background:transparent;border:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;cursor:pointer}
-.ld-tab.active{color:var(--pink);border-bottom-color:var(--pink)}
-.ld-panel{padding:1rem 1.25rem;display:none}
-.ld-panel.active{display:block}
-.booking-item{display:flex;align-items:center;gap:.85rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.booking-item{display:flex;align-items:center;gap:.85rem;padding:.85rem 0;border-bottom:1px solid var(--bd)}
 .booking-item:last-child{border-bottom:none}
-.bi-thumb{width:44px;height:44px;border-radius:10px;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.bi-info{flex:1;min-width:0}
-.bi-name{font-size:.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bi-meta{font-size:.72rem;color:var(--text-muted);margin-top:.1rem}
-.bi-right{text-align:right;flex-shrink:0}
-.bi-price{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--lime)}
-.listing-item{display:flex;align-items:center;gap:.85rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
-.listing-item:last-child{border-bottom:none}
-.li-thumb{width:50px;height:50px;border-radius:10px;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-.li-info{flex:1}
-.li-name{font-size:.85rem;font-weight:600}
-.li-price{font-size:.75rem;color:var(--pink);font-weight:600;margin-top:.1rem}
-.li-stats{font-size:.68rem;color:var(--text-muted);margin-top:.1rem}
-.chart-wrap{display:flex;align-items:flex-end;gap:5px;height:80px;margin-top:.75rem}
-.chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.chart-bar{width:100%;border-radius:3px 3px 0 0;background:rgba(255,31,110,.4);transition:background .2s;cursor:pointer;min-height:4px}
-.chart-bar:hover{background:var(--pink)}
-.chart-lbl{font-size:.58rem;color:var(--text-muted)}
-.add-listing-btn{background:var(--pink-light);border:1px dashed rgba(255,31,110,.3);border-radius:14px;padding:1rem;width:100%;color:var(--pink);font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.5rem}
-.add-listing-btn:hover{background:rgba(255,31,110,.2)}
+.bi-thumb{width:44px;height:44px;border-radius:10px;background:rgba(255,31,110,.15);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 
-/* ═══════════════════════════════════════
-   PAGE: ADMIN
-═══════════════════════════════════════ */
-.admin-header{background:var(--navy2);padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
-.admin-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800}
-.admin-sub{font-size:.7rem;color:var(--text-muted);margin-top:.1rem}
-.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:.85rem 1.25rem}
-.ast{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:.7rem;text-align:center}
-.ast-v{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--lime)}
-.ast-l{font-size:.62rem;color:var(--text-muted);margin-top:.1rem}
-.admin-toolbar{padding:.5rem 1.25rem;display:flex;gap:.4rem}
-.admin-table{padding:0 1.25rem}
-.at-row{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.78rem}
+/* ════════════════════════════════
+   AI HUB — 8 Features
+════════════════════════════════ */
+.ai-hub-header{padding:1.25rem 1.5rem .75rem;text-align:center}
+.ai-hub-header h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
+.ai-hub-header h2 span{color:var(--pk)}
+.ai-hub-header p{font-size:.8rem;color:var(--muted);line-height:1.6}
+.ai-features-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;padding:0 1.25rem}
+.ai-feat-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:1.1rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.ai-feat-card:hover{border-color:rgba(255,31,110,.35);transform:translateY(-2px)}
+.ai-feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pk),transparent)}
+.ai-feat-icon{font-size:1.6rem;margin-bottom:.6rem;display:block}
+.ai-feat-name{font-size:.82rem;font-weight:600;margin-bottom:.25rem;line-height:1.3}
+.ai-feat-desc{font-size:.7rem;color:var(--muted);line-height:1.5}
+.ai-feat-badge{position:absolute;top:.6rem;right:.6rem;background:rgba(255,31,110,.15);color:var(--pk);border-radius:100px;font-size:.55rem;font-weight:700;padding:.15rem .5rem}
+
+/* AI TOOL PAGE */
+.ai-tool-page{display:none;padding-bottom:80px}
+.ai-tool-page.active{display:block}
+.ai-back{padding:.75rem 1.25rem;display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted);cursor:pointer}
+.ai-back:hover{color:#fff}
+.ai-tool-header{padding:.5rem 1.25rem 1.25rem}
+.ai-tool-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.3rem}
+.ai-tool-sub{font-size:.8rem;color:var(--muted);line-height:1.6}
+.ai-body{padding:0 1.25rem}
+.ai-result{background:rgba(255,31,110,.06);border:1px solid rgba(255,31,110,.15);border-radius:16px;padding:1.1rem;margin-top:1rem;display:none}
+.ai-result.show{display:block}
+.ai-result-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pk);margin-bottom:.6rem}
+.ai-result-content{font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.75;white-space:pre-wrap}
+.ai-thinking{display:flex;align-items:center;gap:.5rem;padding:.75rem 0;color:var(--muted);font-size:.82rem}
+.ai-thinking-dots span{animation:blink 1.2s infinite}
+.ai-thinking-dots span:nth-child(2){animation-delay:.2s}
+.ai-thinking-dots span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}
+.ai-chat{display:flex;flex-direction:column;gap:.75rem;margin-top:.75rem}
+.chat-bubble{max-width:85%;padding:.75rem 1rem;border-radius:14px;font-size:.83rem;line-height:1.6}
+.chat-user{background:var(--pk);color:#fff;align-self:flex-end;border-radius:14px 14px 4px 14px}
+.chat-ai{background:rgba(255,255,255,.07);color:rgba(255,255,255,.85);align-self:flex-start;border-radius:14px 14px 14px 4px}
+.chat-input-row{display:flex;gap:.5rem;padding:0 1.25rem;margin-top:.75rem}
+.chat-input{flex:1;background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:100px;padding:.65rem 1rem;color:#fff;font-size:.85rem;outline:none;font-family:'Plus Jakarta Sans',sans-serif}
+.chat-input::placeholder{color:var(--muted)}
+.chat-input:focus{border-color:var(--pk)}
+.chat-send{background:var(--pk);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:1rem}
+.select-input{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:12px;padding:.75rem 1rem;color:#fff;font-size:.9rem;outline:none;font-family:'Plus Jakarta Sans',sans-serif;appearance:none;cursor:pointer}
+.select-input option{background:#0D0B1F;color:#fff}
+.size-opts{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
+.size-btn{padding:.35rem .75rem;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.size-btn.active{background:rgba(255,31,110,.15);border-color:var(--pk);color:#fff}
+.file-upload{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.2);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .2s;font-size:.83rem;color:var(--muted)}
+.file-upload:hover{border-color:var(--pk);background:rgba(255,31,110,.05)}
+.file-preview{width:100%;border-radius:12px;margin-top:.75rem;max-height:140px;object-fit:cover;display:none}
+.trend-card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:.85rem 1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.85rem}
+.trend-icon{font-size:1.5rem;flex-shrink:0}
+.trend-info{flex:1}
+.trend-name{font-size:.85rem;font-weight:600;margin-bottom:.15rem}
+.trend-meta{font-size:.72rem;color:var(--muted)}
+.trend-score{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--lm);flex-shrink:0}
+.price-suggestion{background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.18);border-radius:12px;padding:1rem}
+.ps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.6rem 0}
+.ps-item{background:rgba(255,255,255,.05);border-radius:8px;padding:.6rem;text-align:center}
+.ps-dur{font-size:.65rem;color:var(--muted);margin-bottom:.2rem}
+.ps-price{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--lm)}
+
+/* ADMIN */
+.admin-header{background:var(--nv2);padding:1rem 1.25rem;border-bottom:1px solid var(--bd)}
+.at-row{display:flex;align-items:center;gap:.75rem;padding:.65rem 1.25rem;border-bottom:1px solid var(--bd);font-size:.78rem}
 .at-row:last-child{border-bottom:none}
-.at-name{flex:1;font-weight:600}
-.at-contact{flex:1;color:var(--text-muted);font-size:.72rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.at-del{background:transparent;border:none;color:var(--text-muted);font-size:.8rem;padding:.2rem}
-.at-del:hover{color:#E24B4A}
-
-/* ═══════════════════════════════════════
-   MODAL: AUTH
-═══════════════════════════════════════ */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-end;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal-sheet{background:var(--navy2);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:1.75rem 1.5rem 2.5rem;border-top:1px solid var(--border);animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:100px;margin:0 auto 1.25rem}
-.modal-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.25rem}
-.modal-sub{font-size:.8rem;color:var(--text-muted);margin-bottom:1.25rem}
-.auth-tabs{display:flex;gap:.4rem;margin-bottom:1.25rem}
-.auth-tab{flex:1;padding:.5rem;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:.82rem;font-weight:600;transition:all .2s;cursor:pointer}
-.auth-tab.active{background:var(--pink);color:#fff;border-color:var(--pink)}
-.form-group{margin-bottom:.85rem}
-.modal-divider{text-align:center;font-size:.75rem;color:var(--text-muted);margin:.75rem 0;position:relative}
-.modal-divider::before,.modal-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border)}
-.modal-divider::before{left:0}.modal-divider::after{right:0}
-.auth-error{background:rgba(226,75,74,.1);border:1px solid rgba(226,75,74,.3);color:#F09595;border-radius:10px;padding:.65rem .85rem;font-size:.78rem;margin-bottom:.75rem;display:none}
-
-/* ═══════════════════════════════════════
-   MODAL: LISTING ADD
-═══════════════════════════════════════ */
-.listing-modal .modal-sheet{max-height:90vh;overflow-y:auto}
-.size-opts{display:flex;gap:.4rem;flex-wrap:wrap}
-.size-btn{padding:.35rem .75rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
-.size-btn.active{background:var(--pink-light);border-color:var(--pink);color:#fff}
-.emoji-picker{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;margin-top:.5rem}
-.emoji-opt{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:.4rem;font-size:1.1rem;cursor:pointer;text-align:center;transition:all .2s}
-.emoji-opt.active{background:var(--pink-light);border-color:var(--pink)}
-
-/* ═══════════════════════════════════════
-   TOAST
-═══════════════════════════════════════ */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1A1730;border:1px solid var(--border);border-radius:100px;padding:.65rem 1.25rem;font-size:.82rem;font-weight:600;color:#fff;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:90vw}
-.toast.show{opacity:1}
-
-/* ═══════════════════════════════════════
-   EMPTY STATE
-═══════════════════════════════════════ */
-.empty{text-align:center;padding:3rem 1.5rem}
-.empty-icon{font-size:2.5rem;margin-bottom:.75rem}
-.empty-title{font-family:'Syne',sans-serif;font-weight:800;margin-bottom:.35rem}
-.empty-sub{font-size:.82rem;color:var(--text-muted);line-height:1.5}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:100px}
 </style>
 </head>
 <body>
 <div class="app" id="app">
 
-  <!-- ══════════════════ TOPBAR ══════════════════ -->
-  <div class="topbar" id="topbar">
-    <div class="logo" onclick="nav('home')">SWAP<span>WEAR</span></div>
-    <div class="topbar-actions">
-      <button class="btn-icon" onclick="nav('browse')" title="Cari">🔍</button>
-      <div id="topbar-auth"></div>
+<!-- TOPBAR -->
+<div class="topbar" id="topbar">
+  <div class="logo" onclick="nav('home')">SWAP<span>WEAR</span></div>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <button style="background:transparent;border:1px solid var(--bd);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.95rem;cursor:pointer" onclick="nav('browse')" title="Cari">🔍</button>
+    <button style="background:transparent;border:1px solid var(--bd);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer" onclick="nav('admin')" title="Admin Panel">⚙️</button>
+    <div id="topbar-auth"></div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: HOME ══════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">🇮🇩 Launching · Bandung · Juli 2026</div>
+    <h1>Airbnb<br/>untuk <em>lemari</em><br/>kamu.</h1>
+    <p class="hero-sub">Sewakan baju yang jarang dipakai. Sewa outfit impian 10–20% dari harga beli. Tanpa ribet. Tanpa rasa bersalah.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="nav('browse')">🔍 Browse Outfit Sekarang</button>
+      <button class="btn-outline" onclick="openModal('auth','lender')">🏷️ Jadi Lender — Hasilkan Uang</button>
     </div>
   </div>
-
-  <!-- ══════════════════ PAGES ══════════════════ -->
-
-  <!-- LANDING -->
-  <div class="page" id="page-home">
-    <div class="hero">
-      <div class="hero-badge">🇮🇩 Launching · Bandung · Juli 2026</div>
-      <h1>Airbnb<br/>untuk <em>lemari</em><br/>kamu.</h1>
-      <p class="hero-sub">Sewakan baju yang jarang dipakai. Sewa outfit impian 10–20% dari harga beli. Tanpa ribet. Tanpa rasa bersalah.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="nav('browse')">🔍 Browse Outfit Sekarang</button>
-        <button class="btn-outline" onclick="openModal('auth','lender')">🏷️ Jadi Lender — Hasilkan Uang</button>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><span class="hstat-num">21.3%</span><div class="hstat-lbl">CAGR P2P Rental</div></div>
-      <div class="hstat"><span class="hstat-num">Rp 12M</span><div class="hstat-lbl">Terbuang/Tahun</div></div>
-      <div class="hstat"><span class="hstat-num">280M</span><div class="hstat-lbl">Penduduk Indonesia</div></div>
-      <div class="hstat"><span class="hstat-num">0</span><div class="hstat-lbl">Pemain Dominan</div></div>
-    </div>
-    <div class="how-section">
-      <div class="section-label">How It Works</div>
-      <div class="section-h" style="font-size:1.4rem">Zero friction.<br/>Zero laundry.</div>
-      <div class="how-steps">
-        <div class="how-step"><div class="how-num">1</div><div class="how-text"><h4>Browse & Book</h4><p>Swipe ribuan outfit. Filter ukuran, vibe, acara.</p></div></div>
-        <div class="how-step"><div class="how-num">2</div><div class="how-text"><h4>Doorstep Delivery</h4><p>Same-day GoSend dalam kota. JNE nationwide.</p></div></div>
-        <div class="how-step"><div class="how-num">3</div><div class="how-text"><h4>Wear & Shine</h4><p>Pakai 3, 5, atau 7 hari. Post. Nikmati.</p></div></div>
-        <div class="how-step"><div class="how-num">4</div><div class="how-text"><h4>Easy Return</h4><p>Kami jemput. Partner laundry kami yang cuci.</p></div></div>
-      </div>
-    </div>
-    <div class="waitlist-section">
-      <h3>Mau duluan? 🎉</h3>
-      <p>Daftar waitlist — dapat akses eksklusif saat launch Juli 2026.</p>
-      <div class="wl-toggle">
-        <button class="wl-tb active" id="wl-btn-lender" onclick="setWlRole('lender')">🏷️ Lender</button>
-        <button class="wl-tb" id="wl-btn-renter" onclick="setWlRole('renter')">👗 Renter</button>
-      </div>
-      <div class="wl-form">
-        <input class="wl-input" id="wl-name" placeholder="Nama kamu"/>
-        <input class="wl-input" id="wl-contact" placeholder="Email atau WhatsApp"/>
-        <button class="btn-primary" onclick="submitWaitlist()">Daftar Sekarang →</button>
-      </div>
-      <div class="wl-success" id="wl-success">✓ Berhasil! Kami hubungi sebelum launch 🎊</div>
-      <div class="wl-count" id="wl-count"></div>
-    </div>
-    <div style="height:1rem"></div>
+  <div class="hero-stats">
+    <div class="hstat"><span class="hstat-num">21.3%</span><div class="hstat-lbl">CAGR P2P Rental</div></div>
+    <div class="hstat"><span class="hstat-num">Rp 12M</span><div class="hstat-lbl">Terbuang/Tahun</div></div>
+    <div class="hstat"><span class="hstat-num">280M</span><div class="hstat-lbl">Penduduk Indonesia</div></div>
+    <div class="hstat"><span class="hstat-num">0</span><div class="hstat-lbl">Pemain Dominan</div></div>
   </div>
-
-  <!-- BROWSE -->
-  <div class="page" id="page-browse">
-    <div class="browse-search">
-      <div class="search-bar">
-        <span>🔍</span>
-        <input type="text" id="search-input" placeholder="Cari kebaya, gaun, jas..." oninput="filterItems()"/>
-      </div>
+  <div class="how-section">
+    <div class="section-label">How It Works</div>
+    <div class="how-step"><div class="how-num">1</div><div class="how-text"><h4>Browse & Book</h4><p>Swipe ribuan outfit. Filter ukuran, vibe, acara.</p></div></div>
+    <div class="how-step"><div class="how-num">2</div><div class="how-text"><h4>Doorstep Delivery</h4><p>Same-day GoSend dalam kota. JNE nationwide.</p></div></div>
+    <div class="how-step"><div class="how-num">3</div><div class="how-text"><h4>Wear & Shine</h4><p>Pakai 3, 5, atau 7 hari. Post. Nikmati.</p></div></div>
+    <div class="how-step"><div class="how-num">4</div><div class="how-text"><h4>Easy Return</h4><p>Kami jemput. Partner laundry kami yang cuci.</p></div></div>
+  </div>
+  <div class="wl-section">
+    <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.4rem">Mau duluan? 🎉</h3>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem">Daftar waitlist — dapat akses eksklusif Juli 2026.</p>
+    <div class="wl-toggle">
+      <button class="wl-tb active" id="wl-btn-lender" onclick="setWlRole('lender')">🏷️ Lender</button>
+      <button class="wl-tb" id="wl-btn-renter" onclick="setWlRole('renter')">👗 Renter</button>
     </div>
-    <div class="cats-scroll" id="cats-scroll"></div>
-    <div class="items-grid" id="items-grid"></div>
-    <div id="items-empty" class="empty hidden">
-      <div class="empty-icon">👗</div>
-      <div class="empty-title">Outfit tidak ditemukan</div>
-      <div class="empty-sub">Coba kata kunci atau kategori lain.</div>
+    <div class="wl-form">
+      <input class="wl-input" id="wl-name" placeholder="Nama kamu"/>
+      <input class="wl-input" id="wl-contact" placeholder="Email atau WhatsApp"/>
+      <button class="btn-primary" onclick="submitWaitlist()">Daftar Sekarang →</button>
+    </div>
+    <div class="wl-success" id="wl-success">✓ Berhasil! Kami hubungi sebelum launch 🎊</div>
+    <div style="font-size:.72rem;color:rgba(255,255,255,.25);margin-top:.6rem" id="wl-count"></div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: BROWSE ══════ -->
+<div class="page" id="page-browse">
+  <div style="padding:.75rem 1.25rem">
+    <div style="background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:100px;padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Cari kebaya, gaun, jas..." style="background:transparent;border:none;outline:none;color:#fff;font-size:.85rem;width:100%;font-family:'Plus Jakarta Sans',sans-serif" oninput="filterItems()"/>
     </div>
   </div>
+  <div class="cats-scroll" id="cats-scroll"></div>
+  <div class="items-grid" id="items-grid"></div>
+  <div id="items-empty" class="empty" style="display:none">
+    <div style="font-size:2.5rem;margin-bottom:.75rem">👗</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:.35rem">Tidak ditemukan</div>
+    <div style="font-size:.82rem;color:var(--muted)">Coba kata kunci lain.</div>
+  </div>
+</div>
 
-  <!-- DETAIL -->
-  <div class="page" id="page-detail">
-    <div class="detail-back" onclick="nav('browse')">← Kembali</div>
-    <div class="detail-hero" id="detail-hero"><button class="detail-fav" id="detail-fav" onclick="toggleFav()">🤍</button></div>
-    <div class="detail-body">
-      <div class="detail-cat" id="detail-cat"></div>
-      <div class="detail-title" id="detail-title"></div>
-      <div class="detail-lender-row">
-        <div class="lender-dot" id="detail-lender-dot"></div>
-        <span id="detail-lender-name" style="font-size:.78rem;color:var(--text-muted)"></span>
-        <span class="detail-rating" id="detail-rating"></span>
-        <span class="detail-reviews" id="detail-reviews"></span>
-      </div>
-      <p class="detail-desc" id="detail-desc"></p>
-      <div class="detail-info-grid" id="detail-info-grid"></div>
-      <div class="dur-label">Pilih Durasi Sewa</div>
-      <div class="dur-opts" id="dur-opts"></div>
-      <div class="detail-price-row">
-        <div class="detail-price" id="detail-price">-</div>
-        <div class="detail-orig" id="detail-orig"></div>
-      </div>
-      <div class="detail-saving" id="detail-saving"></div>
-      <div class="detail-delivery">🚚 Same-day delivery via GoSend · Nationwide via JNE</div>
-      <div class="detail-cta-row">
-        <button class="btn-fav" id="btn-fav-cta" onclick="toggleFav()">🤍</button>
-        <button class="btn-primary" style="flex:1" onclick="bookNow()">Sewa Sekarang →</button>
-      </div>
+<!-- ══════ PAGE: DETAIL ══════ -->
+<div class="page" id="page-detail">
+  <div style="padding:.75rem 1.25rem;display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted);cursor:pointer" onclick="nav('browse')">← Kembali</div>
+  <div class="detail-hero" id="detail-hero"></div>
+  <div class="detail-body">
+    <div id="detail-cat" style="margin-bottom:.5rem"></div>
+    <div class="detail-title" id="detail-title"></div>
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+      <span id="detail-lender" style="font-size:.78rem;color:var(--muted)"></span>
+      <span id="detail-rating" style="font-size:.78rem;color:var(--lm);font-weight:600"></span>
+    </div>
+    <p id="detail-desc" style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:1rem"></p>
+    <div id="detail-info" style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.25rem"></div>
+    <div style="font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem">Pilih Durasi Sewa</div>
+    <div id="dur-opts" style="display:flex;gap:.5rem;margin-bottom:1.25rem"></div>
+    <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem">
+      <div id="detail-price" style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--lm)"></div>
+      <div id="detail-orig" style="font-size:.75rem;color:var(--muted);text-decoration:line-through"></div>
+    </div>
+    <div id="detail-saving" style="font-size:.72rem;color:var(--pk);font-weight:600;margin-bottom:.3rem"></div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:1.25rem">🚚 Same-day GoSend · Nationwide JNE</div>
+    <div style="display:flex;gap:.65rem">
+      <button id="btn-fav" style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:.8rem;font-size:1rem;cursor:pointer" onclick="toggleFav()">🤍</button>
+      <button class="btn-primary" style="flex:1" onclick="bookNow()">Sewa Sekarang →</button>
     </div>
   </div>
+</div>
 
-  <!-- BOOKING CONFIRM -->
-  <div class="page" id="page-confirm">
-    <div class="confirm-wrap">
-      <div class="confirm-icon">🎉</div>
-      <div class="confirm-title">Booking Dikonfirmasi!</div>
-      <div class="confirm-sub">Outfit kamu sedang disiapkan.<br/>GoSend akan menjemput dalam 1–2 jam.</div>
-      <div class="confirm-card" id="confirm-card"></div>
-      <div class="confirm-btns">
-        <button class="btn-primary" onclick="nav('lender')">Lihat Booking Saya</button>
-        <button class="btn-outline" onclick="nav('browse')">Cari Outfit Lain</button>
+<!-- ══════ PAGE: CONFIRM ══════ -->
+<div class="page" id="page-confirm">
+  <div style="padding:2rem 1.5rem;text-align:center;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center">
+    <div style="font-size:4rem;margin-bottom:1rem">🎉</div>
+    <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.4rem">Booking Dikonfirmasi!</div>
+    <div style="font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:1.5rem">Outfit kamu sedang disiapkan.<br/>GoSend akan menjemput dalam 1–2 jam.</div>
+    <div id="confirm-card" style="background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:1.25rem;width:100%;text-align:left;margin-bottom:1.25rem"></div>
+    <div style="display:flex;flex-direction:column;gap:.6rem;width:100%">
+      <button class="btn-primary" onclick="nav('lender')">Lihat Booking Saya</button>
+      <button class="btn-outline" onclick="nav('browse')">Cari Outfit Lain</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: LENDER ══════ -->
+<div class="page" id="page-lender">
+  <div style="padding:1.25rem 1.25rem .5rem">
+    <div id="ld-greeting" style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800"></div>
+    <div style="font-size:.78rem;color:var(--muted);margin-top:.15rem">Closet Dashboard</div>
+  </div>
+  <div id="ld-stats" style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:.75rem 1.25rem"></div>
+  <div style="display:flex;border-bottom:1px solid var(--bd);padding:0 1.25rem;gap:.25rem;overflow-x:auto;scrollbar-width:none">
+    <button class="ld-tab active" onclick="ldTab('overview',this)">Overview</button>
+    <button class="ld-tab" onclick="ldTab('bookings',this)">Booking</button>
+    <button class="ld-tab" onclick="ldTab('listings',this)">Listing</button>
+    <button class="ld-tab" onclick="ldTab('earnings',this)">Pendapatan</button>
+  </div>
+  <div id="lp-overview" class="ld-panel" style="padding:1rem 1.25rem;display:block"></div>
+  <div id="lp-bookings" class="ld-panel" style="padding:1rem 1.25rem;display:none"></div>
+  <div id="lp-listings" class="ld-panel" style="padding:1rem 1.25rem;display:none"></div>
+  <div id="lp-earnings" class="ld-panel" style="padding:1rem 1.25rem;display:none"></div>
+</div>
+
+<!-- ══════ PAGE: WEARBOT ══════ -->
+<div class="page" id="page-ai">
+  <div class="ai-hub-header">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,31,110,.12);border:1px solid rgba(255,31,110,.2);border-radius:100px;padding:.3rem .85rem;font-size:.68rem;font-weight:600;color:#FFB3CC;margin-bottom:.75rem">🤖 WEARBOT</div>
+    <h2>WEAR<span class="w">BOT</span></h2>
+    <p>8 fitur AI untuk pengalaman fashion rental untuk pengalaman fashion rental yang lebih personal, cerdas, dan efisien.</p>
+  </div>
+  <div class="ai-features-grid">
+    <div class="ai-feat-card" onclick="openAI('style')">
+      <span class="ai-feat-icon">✨</span>
+      <div class="ai-feat-name">Style Bot</div>
+      <div class="ai-feat-desc">Personal stylist yang rekomendasikan outfit terbaik untukmu</div>
+      <span class="ai-feat-badge">Chat</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('occasion')">
+      <span class="ai-feat-icon">🎯</span>
+      <div class="ai-feat-name">Occasion Bot</div>
+      <div class="ai-feat-desc">Ceritakan acaramu, kami kurasi outfit yang sempurna</div>
+      <span class="ai-feat-badge">Smart</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('calculator')">
+      <span class="ai-feat-icon">💰</span>
+      <div class="ai-feat-name">Wardrobe Calculator</div>
+      <div class="ai-feat-desc">Hitung potensi penghasilan dari lemarimu</div>
+      <span class="ai-feat-badge">Lender</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('pricing')">
+      <span class="ai-feat-icon">📊</span>
+      <div class="ai-feat-name">Pricing Bot</div>
+      <div class="ai-feat-desc">Harga optimal untuk listing berdasarkan pasar</div>
+      <span class="ai-feat-badge">Lender</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('damage')">
+      <span class="ai-feat-icon">🔍</span>
+      <div class="ai-feat-name">Damage Detection</div>
+      <div class="ai-feat-desc">WEARBOT deteksi kerusakan dari foto sebelum & sesudah sewa</div>
+      <span class="ai-feat-badge">Vision</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('sizing')">
+      <span class="ai-feat-icon">📏</span>
+      <div class="ai-feat-name">Size Matching</div>
+      <div class="ai-feat-desc">Input ukuran tubuhmu, WEARBOT temukan fit yang sempurna</div>
+      <span class="ai-feat-badge">Fit</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('trend')">
+      <span class="ai-feat-icon">📈</span>
+      <div class="ai-feat-name">Trend Forecast</div>
+      <div class="ai-feat-desc">Prediksi tren outfit berdasarkan event & musim</div>
+      <span class="ai-feat-badge">Forecast</span>
+    </div>
+    <div class="ai-feat-card" onclick="openAI('content')">
+      <span class="ai-feat-icon">✍️</span>
+      <div class="ai-feat-name">Content Generator</div>
+      <div class="ai-feat-desc">AI tulis deskripsi listing yang menarik & profesional</div>
+      <span class="ai-feat-badge">Write</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: ADMIN ══════ -->
+<div class="page" id="page-admin">
+  <div class="admin-header">
+    <div style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800">Admin Panel</div>
+    <div style="font-size:.7rem;color:var(--muted);margin-top:.1rem">SWAPWEAR · Internal</div>
+  </div>
+  <div id="admin-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:.85rem 1.25rem"></div>
+  <div style="padding:0 1.25rem .75rem;display:flex;gap:.4rem;flex-wrap:wrap">
+    <button style="padding:.4rem .85rem;border-radius:100px;font-size:.72rem;font-weight:600;border:1px solid var(--pk);background:transparent;color:var(--pk);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="adminFilter('all',this)">Semua</button>
+    <button style="padding:.4rem .85rem;border-radius:100px;font-size:.72rem;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="adminFilter('lender',this)">Lender</button>
+    <button style="padding:.4rem .85rem;border-radius:100px;font-size:.72rem;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="adminFilter('renter',this)">Renter</button>
+    <button style="padding:.4rem .85rem;border-radius:100px;font-size:.72rem;font-weight:600;background:var(--pk);border:none;color:#fff;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-left:auto" onclick="exportCSV()">↓ CSV</button>
+  </div>
+  <div id="admin-table"></div>
+  <div style="padding:1rem 1.25rem">
+    <div class="section-label" style="margin-bottom:.75rem">Tambah Manual</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <input class="input" id="adm-name" placeholder="Nama"/>
+      <input class="input" id="adm-contact" placeholder="Email / WhatsApp"/>
+      <select class="input" id="adm-role"><option value="lender">Lender</option><option value="renter">Renter</option></select>
+      <button class="btn-primary" onclick="adminAdd()">Tambah ke Waitlist</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ WEARBOT TOOL PAGES ══════ -->
+
+<!-- 1. STYLE BOT -->
+<div class="ai-tool-page" id="ai-style">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">✨ Style AI — Personal Stylist</div>
+    <div class="ai-tool-sub">Ceritakan kebutuhan kamu — WEARBOT akan rekomendasikan outfit terbaik dari koleksi SWAPWEAR yang tersedia.</div>
+  </div>
+  <div class="ai-body">
+    <div id="style-chat" class="ai-chat"></div>
+    <div id="style-thinking" class="ai-thinking" style="display:none"><span>✨</span><span>WEARBOT sedang berpikir</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+  <div class="chat-input-row" style="margin-top:1rem">
+    <input class="chat-input" id="style-input" placeholder="Ceritakan kebutuhanmu..." onkeydown="if(event.key==='Enter')sendStyle()"/>
+    <button class="chat-send" onclick="sendStyle()">→</button>
+  </div>
+</div>
+
+<!-- 2. OCCASION BOT -->
+<div class="ai-tool-page" id="ai-occasion">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">🎯 Occasion Intelligence</div>
+    <div class="ai-tool-sub">Deskripsikan acaramu dan kami akan kurasi outfit yang paling sesuai.</div>
+  </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Deskripsi Acara</label>
+      <textarea class="input" id="occasion-input" rows="3" placeholder="cth. Wisuda outdoor ITB, siang hari, cuaca panas, dresscode: formal elegan, ukuran M, budget Rp 200K"></textarea>
+    </div>
+    <button class="btn-primary" onclick="runOccasion()">Kurasi Outfit untuk Saya →</button>
+    <div id="occasion-thinking" class="ai-thinking" style="display:none"><span>🎯</span><span>Menganalisis acara kamu</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="occasion-result">
+      <div class="ai-result-label">Rekomendasi SWAPWEAR untuk Acaramu</div>
+      <div class="ai-result-content" id="occasion-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. WARDROBE CALCULATOR -->
+<div class="ai-tool-page" id="ai-calculator">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">💰 Wardrobe Value Calculator</div>
+    <div class="ai-tool-sub">Deskripsikan item di lemarimu dan WEARBOT akan hitung potensi penghasilanmu sebagai lender.</div>
+  </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Deskripsi Item di Lemarimu</label>
+      <textarea class="input" id="calc-input" rows="4" placeholder="cth. 1 kebaya modern putih kondisi bagus, 2 gaun pesta warna pastel, 1 jas hitam slim fit, 3 batik set couple, 1 tuxedo full set"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Lokasi Kamu</label>
+      <select class="select-input" id="calc-city">
+        <option value="Bandung">Bandung</option>
+        <option value="Jakarta">Jakarta</option>
+        <option value="Surabaya">Surabaya</option>
+        <option value="Yogyakarta">Yogyakarta</option>
+        <option value="Bali">Bali</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="runCalculator()">Hitung Potensi Penghasilan →</button>
+    <div id="calc-thinking" class="ai-thinking" style="display:none"><span>💰</span><span>Menghitung potensi lemarimu</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="calc-result">
+      <div class="ai-result-label">Estimasi Penghasilan Bulananmu</div>
+      <div class="ai-result-content" id="calc-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. PRICING BOT -->
+<div class="ai-tool-page" id="ai-pricing">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">📊 AI Pricing Assistant</div>
+    <div class="ai-tool-sub">Masukkan detail item dan WEARBOT akan rekomendasikan harga sewa optimal berdasarkan pasar saat ini.</div>
+  </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Nama & Deskripsi Item</label>
+      <input class="input" id="pricing-name" placeholder="cth. Kebaya modern putih brokat premium"/>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Kategori</label>
+      <select class="select-input" id="pricing-cat">
+        <option>Gaun Pesta</option><option>Kebaya</option><option>Batik</option>
+        <option>Jas & Suit</option><option>Prewed</option><option>Casual</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Kondisi Item</label>
+      <select class="select-input" id="pricing-cond">
+        <option>Excellent — seperti baru</option>
+        <option>Good — sangat baik, 2-3x pakai</option>
+        <option>Fair — baik, beberapa kali pakai</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Harga Beli Asli (Rp)</label>
+      <input class="input" id="pricing-retail" type="number" placeholder="2000000"/>
+    </div>
+    <button class="btn-primary" onclick="runPricing()">Rekomendasikan Harga →</button>
+    <div id="pricing-thinking" class="ai-thinking" style="display:none"><span>📊</span><span>Menganalisis pasar</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="pricing-result">
+      <div class="ai-result-label">Rekomendasi Harga Optimal</div>
+      <div id="pricing-suggestion" class="price-suggestion" style="display:none">
+        <div style="font-size:.75rem;color:rgba(255,255,255,.45);margin-bottom:.4rem">Harga rekomendasi WEARBOT:</div>
+        <div class="ps-grid" id="ps-grid"></div>
+      </div>
+      <div class="ai-result-content" id="pricing-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. DAMAGE DETECTION -->
+<div class="ai-tool-page" id="ai-damage">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">🔍 Damage Detection</div>
+    <div class="ai-tool-sub">Upload foto sebelum dan sesudah sewa. WEARBOT akan mendeteksi apakah ada kerusakan pada item.</div>
+  </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Foto SEBELUM Disewa</label>
+      <div class="file-upload" onclick="document.getElementById('img-before').click()">
+        📷 Tap untuk upload foto sebelum
+        <input type="file" id="img-before" accept="image/*" style="display:none" onchange="previewImg(this,'prev-before')"/>
+      </div>
+      <img id="prev-before" class="file-preview"/>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Foto SETELAH Dikembalikan</label>
+      <div class="file-upload" onclick="document.getElementById('img-after').click()">
+        📷 Tap untuk upload foto setelah
+        <input type="file" id="img-after" accept="image/*" style="display:none" onchange="previewImg(this,'prev-after')"/>
+      </div>
+      <img id="prev-after" class="file-preview"/>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Nama Item</label>
+      <input class="input" id="damage-name" placeholder="cth. Kebaya Modern Putih"/>
+    </div>
+    <button class="btn-primary" onclick="runDamage()">Analisis Kondisi Item →</button>
+    <div id="damage-thinking" class="ai-thinking" style="display:none"><span>🔍</span><span>Menganalisis kondisi item</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="damage-result">
+      <div class="ai-result-label">Hasil Analisis Kondisi</div>
+      <div class="ai-result-content" id="damage-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. SIZE MATCHING -->
+<div class="ai-tool-page" id="ai-sizing">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">📏 AI Size Matching</div>
+    <div class="ai-tool-sub">Input ukuran tubuhmu dan WEARBOT akan menemukan outfit yang paling pas dari koleksi kami.</div>
+  </div>
+  <div class="ai-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem">
+      <div class="form-group">
+        <label class="input-label">Tinggi Badan (cm)</label>
+        <input class="input" id="sz-height" type="number" placeholder="162"/>
+      </div>
+      <div class="form-group">
+        <label class="input-label">Berat Badan (kg)</label>
+        <input class="input" id="sz-weight" type="number" placeholder="52"/>
+      </div>
+      <div class="form-group">
+        <label class="input-label">Lingkar Dada (cm)</label>
+        <input class="input" id="sz-chest" type="number" placeholder="86"/>
+      </div>
+      <div class="form-group">
+        <label class="input-label">Lingkar Pinggang (cm)</label>
+        <input class="input" id="sz-waist" type="number" placeholder="68"/>
       </div>
     </div>
-  </div>
-
-  <!-- LENDER DASHBOARD -->
-  <div class="page" id="page-lender">
-    <div class="ld-welcome">
-      <div class="ld-hi" id="ld-greeting">Halo 👋</div>
-      <div class="ld-sub">Closet Dashboard</div>
+    <div class="form-group">
+      <label class="input-label">Jenis Outfit yang Dicari</label>
+      <select class="select-input" id="sz-type">
+        <option>Gaun Pesta</option><option>Kebaya</option><option>Batik</option>
+        <option>Jas & Suit</option><option>Semua Jenis</option>
+      </select>
     </div>
-    <div class="ld-stats-row" id="ld-stats-row"></div>
-    <div class="ld-tabs">
-      <button class="ld-tab active" onclick="ldTab('overview',this)">Overview</button>
-      <button class="ld-tab" onclick="ldTab('bookings',this)">Booking</button>
-      <button class="ld-tab" onclick="ldTab('listings',this)">Listing</button>
-      <button class="ld-tab" onclick="ldTab('earnings',this)">Pendapatan</button>
-    </div>
-    <div class="ld-panel active" id="lp-overview"></div>
-    <div class="ld-panel" id="lp-bookings"></div>
-    <div class="ld-panel" id="lp-listings"></div>
-    <div class="ld-panel" id="lp-earnings"></div>
-  </div>
-
-  <!-- ADMIN -->
-  <div class="page" id="page-admin">
-    <div class="admin-header">
-      <div class="admin-title">Admin Panel</div>
-      <div class="admin-sub">SWAPWEAR · Waitlist & Bookings</div>
-    </div>
-    <div class="admin-stats" id="admin-stats"></div>
-    <div style="padding:.25rem 1.25rem">
-      <div class="section-label">Waitlist</div>
-    </div>
-    <div style="display:flex;gap:.4rem;padding:.25rem 1.25rem .75rem;flex-wrap:wrap">
-      <button class="btn-sm btn-ghost-sm" onclick="adminFilter('all',this)" style="color:var(--pink);border-color:var(--pink)">Semua</button>
-      <button class="btn-sm btn-ghost-sm" onclick="adminFilter('lender',this)">Lender</button>
-      <button class="btn-sm btn-ghost-sm" onclick="adminFilter('renter',this)">Renter</button>
-      <button class="btn-sm btn-pink-sm" onclick="exportCSV()" style="margin-left:auto">↓ CSV</button>
-    </div>
-    <div class="admin-table" id="admin-table"></div>
-    <div style="padding:1rem 1.25rem">
-      <div class="section-label" style="margin-bottom:.75rem">Tambah Manual</div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <input class="input" id="adm-name" placeholder="Nama"/>
-        <input class="input" id="adm-contact" placeholder="Email / WhatsApp"/>
-        <select class="input" id="adm-role"><option value="lender">Lender</option><option value="renter">Renter</option></select>
-        <button class="btn-primary" onclick="adminAdd()">Tambah ke Waitlist</button>
+    <div class="form-group">
+      <label class="input-label">Preferensi Fit</label>
+      <div style="display:flex;gap:.4rem;margin-top:.4rem">
+        <button class="size-btn active" id="fit-slim" onclick="setFit('slim',this)">Slim / Ketat</button>
+        <button class="size-btn" id="fit-regular" onclick="setFit('regular',this)">Regular / Pas</button>
+        <button class="size-btn" id="fit-loose" onclick="setFit('loose',this)">Loose / Longgar</button>
       </div>
     </div>
+    <button class="btn-primary" onclick="runSizing()">Temukan Outfit yang Pas →</button>
+    <div id="sizing-thinking" class="ai-thinking" style="display:none"><span>📏</span><span>Mencocokkan ukuranmu</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="sizing-result">
+      <div class="ai-result-label">Outfit yang Cocok untuk Ukuranmu</div>
+      <div class="ai-result-content" id="sizing-content"></div>
+    </div>
   </div>
+</div>
 
-  <!-- BOTTOM NAV -->
-  <div class="bottom-nav" id="bottom-nav">
-    <div class="bn-item active" id="bn-home" onclick="nav('home')"><div class="bn-icon">🏠</div><span>Home</span></div>
-    <div class="bn-item" id="bn-browse" onclick="nav('browse')"><div class="bn-icon">🔍</div><span>Explore</span></div>
-    <div class="bn-item" id="bn-add" onclick="openAddListing()"><div class="bn-plus">＋</div></div>
-    <div class="bn-item" id="bn-lender" onclick="nav('lender')"><div class="bn-icon">📊</div><span>Dashboard</span></div>
-    <div class="bn-item" id="bn-admin" onclick="nav('admin')"><div class="bn-icon">⚙️</div><span>Admin</span></div>
+<!-- 7. TREND FORECAST -->
+<div class="ai-tool-page" id="ai-trend">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">📈 Trend Forecasting</div>
+    <div class="ai-tool-sub">WEARBOT prediksi outfit yang akan trending berdasarkan event, musim, dan data booking.</div>
   </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Kota</label>
+      <select class="select-input" id="trend-city">
+        <option>Bandung</option><option>Jakarta</option><option>Surabaya</option><option>Yogyakarta</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="input-label">Periode</label>
+      <select class="select-input" id="trend-period">
+        <option>Bulan ini (Mei 2026)</option>
+        <option>Bulan depan (Juni 2026)</option>
+        <option>Juli 2026 (Musim Wisuda)</option>
+        <option>3 bulan ke depan</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="runTrend()">Lihat Prediksi Tren →</button>
+    <div id="trend-thinking" class="ai-thinking" style="display:none"><span>📈</span><span>Menganalisis tren pasar</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="trend-result">
+      <div class="ai-result-label">Prediksi Tren — <span id="trend-period-label"></span></div>
+      <div class="ai-result-content" id="trend-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. CONTENT GENERATOR -->
+<div class="ai-tool-page" id="ai-content">
+  <div class="ai-back" onclick="closeAI()">← Kembali ke WEARBOT</div>
+  <div class="ai-tool-header">
+    <div class="ai-tool-title">✍️ AI Content Generator</div>
+    <div class="ai-tool-sub">Deskripsikan item secara singkat — WEARBOT akan tulis listing yang menarik, lengkap, dan profesional.</div>
+  </div>
+  <div class="ai-body">
+    <div class="form-group">
+      <label class="input-label">Deskripsi Singkat Item</label>
+      <textarea class="input" id="content-input" rows="3" placeholder="cth. Kebaya putih modern, bahan brokat, kondisi bagus, ukuran M, dipakai 2x untuk wisuda dan kondangan"></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem">
+      <div class="form-group">
+        <label class="input-label">Kategori</label>
+        <select class="select-input" id="content-cat">
+          <option>Kebaya</option><option>Gaun Pesta</option><option>Batik</option>
+          <option>Jas & Suit</option><option>Prewed</option><option>Casual</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="input-label">Target Pembeli</label>
+        <select class="select-input" id="content-target">
+          <option>Perempuan</option><option>Laki-laki</option><option>Semua Gender</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="runContent()">Generate Deskripsi Listing →</button>
+    <div id="content-thinking" class="ai-thinking" style="display:none"><span>✍️</span><span>Menulis deskripsi untukmu</span><span class="ai-thinking-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="ai-result" id="content-result">
+      <div class="ai-result-label">Deskripsi Listing dari WEARBOT</div>
+      <div class="ai-result-content" id="content-output"></div>
+      <button style="background:rgba(255,255,255,.08);border:none;border-radius:8px;padding:.5rem 1rem;color:#fff;font-size:.78rem;font-weight:600;margin-top:.75rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="copyContent()">📋 Copy Deskripsi</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bn-item active" id="bn-home" onclick="nav('home')"><div class="bn-icon">🏠</div><span>Home</span></div>
+  <div class="bn-item" id="bn-browse" onclick="nav('browse')"><div class="bn-icon">🔍</div><span>Explore</span></div>
+  <div class="bn-item" id="bn-add" onclick="openAddListing()"><div class="bn-plus">＋</div></div>
+  <div class="bn-item" id="bn-ai" onclick="nav('ai')"><div class="bn-icon">🤖</div><span>WEARBOT</span></div>
+  <div class="bn-item" id="bn-lender" onclick="nav('lender')"><div class="bn-icon">📊</div><span>Dashboard</span></div>
+</div>
 </div>
 
 <!-- AUTH MODAL -->
 <div class="modal-overlay" id="modal-auth" onclick="closeModalOutside(event,'auth')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title" id="auth-modal-title">Masuk ke SWAPWEAR</div>
-    <div class="modal-sub" id="auth-modal-sub">Buat akun atau masuk untuk mulai sewa / sewakan outfit.</div>
-    <div class="auth-tabs">
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.25rem">Masuk ke SWAPWEAR</div>
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem">Buat akun atau masuk untuk mulai.</div>
+    <div style="display:flex;gap:.4rem;margin-bottom:1.25rem">
       <button class="auth-tab active" id="auth-tab-login" onclick="authTab('login')">Masuk</button>
       <button class="auth-tab" id="auth-tab-register" onclick="authTab('register')">Daftar</button>
     </div>
-    <div class="auth-error" id="auth-error"></div>
+    <div style="background:rgba(226,75,74,.1);border:1px solid rgba(226,75,74,.3);color:#F09595;border-radius:10px;padding:.65rem .85rem;font-size:.78rem;margin-bottom:.75rem;display:none" id="auth-error"></div>
     <div id="auth-form-login">
       <div class="form-group"><label class="input-label">Email</label><input class="input" id="login-email" type="email" placeholder="email@kamu.com"/></div>
       <div class="form-group"><label class="input-label">Password</label><input class="input" id="login-pass" type="password" placeholder="••••••••"/></div>
       <button class="btn-primary" onclick="doLogin()">Masuk</button>
-      <div class="modal-divider">atau</div>
-      <p style="text-align:center;font-size:.78rem;color:var(--text-muted)">Belum punya akun? <span style="color:var(--pink);cursor:pointer;font-weight:600" onclick="authTab('register')">Daftar sekarang</span></p>
     </div>
     <div id="auth-form-register" style="display:none">
-      <div class="form-group"><label class="input-label">Nama Lengkap</label><input class="input" id="reg-name" placeholder="Nama kamu"/></div>
+      <div class="form-group"><label class="input-label">Nama</label><input class="input" id="reg-name" placeholder="Nama kamu"/></div>
       <div class="form-group"><label class="input-label">Email</label><input class="input" id="reg-email" type="email" placeholder="email@kamu.com"/></div>
       <div class="form-group"><label class="input-label">WhatsApp</label><input class="input" id="reg-wa" placeholder="08xxxxxxxxxx"/></div>
       <div class="form-group"><label class="input-label">Password</label><input class="input" id="reg-pass" type="password" placeholder="Min. 6 karakter"/></div>
       <div class="form-group">
         <label class="input-label">Saya ingin</label>
         <div style="display:flex;gap:.5rem;margin-top:.25rem">
-          <button class="auth-tab active" id="role-renter" style="flex:1" onclick="setRegRole('renter')">👗 Renter</button>
-          <button class="auth-tab" id="role-lender" style="flex:1" onclick="setRegRole('lender')">🏷️ Lender</button>
+          <button class="auth-tab active" id="role-renter" onclick="setRegRole('renter')">👗 Renter</button>
+          <button class="auth-tab" id="role-lender" onclick="setRegRole('lender')">🏷️ Lender</button>
         </div>
       </div>
       <button class="btn-primary" onclick="doRegister()">Buat Akun</button>
@@ -507,598 +706,527 @@ input,select,textarea{font-family:'Plus Jakarta Sans',sans-serif}
 </div>
 
 <!-- ADD LISTING MODAL -->
-<div class="modal-overlay listing-modal" id="modal-listing" onclick="closeModalOutside(event,'listing')">
+<div class="modal-overlay" id="modal-listing" onclick="closeModalOutside(event,'listing')">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title">Tambah Listing Baru</div>
-    <div class="modal-sub">Sewakan outfit kamu & mulai hasilkan uang.</div>
-    <div class="form-group">
-      <label class="input-label">Nama Outfit</label>
-      <input class="input" id="lst-name" placeholder="cth. Evening Gown Dusty Rose"/>
+    <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.25rem">Tambah Listing</div>
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:1.25rem">Sewakan outfit dan mulai hasilkan uang.</div>
+    <div class="form-group"><label class="input-label">Nama Outfit</label><input class="input" id="lst-name" placeholder="cth. Evening Gown Dusty Rose"/></div>
+    <div class="form-group"><label class="input-label">Kategori</label><select class="input" id="lst-cat"><option>Gaun Pesta</option><option>Kebaya</option><option>Batik</option><option>Jas & Suit</option><option>Prewed</option><option>Casual</option></select></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
+      <div class="form-group"><label class="input-label">Harga/3hr</label><input class="input" id="lst-p3" type="number" placeholder="180000"/></div>
+      <div class="form-group"><label class="input-label">Harga/5hr</label><input class="input" id="lst-p5" type="number" placeholder="270000"/></div>
+      <div class="form-group"><label class="input-label">Harga/7hr</label><input class="input" id="lst-p7" type="number" placeholder="350000"/></div>
     </div>
-    <div class="form-group">
-      <label class="input-label">Kategori</label>
-      <select class="input" id="lst-cat">
-        <option value="Gaun Pesta">Gaun Pesta</option>
-        <option value="Kebaya">Kebaya</option>
-        <option value="Batik">Batik</option>
-        <option value="Jas & Suit">Jas & Suit</option>
-        <option value="Casual">Casual</option>
-        <option value="Prewed">Prewed</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Emoji / Ikon Outfit</label>
-      <div class="emoji-picker" id="emoji-picker"></div>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Harga Sewa / 3 Hari (Rp)</label>
-      <input class="input" id="lst-price3" type="number" placeholder="180000"/>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Harga Sewa / 5 Hari (Rp)</label>
-      <input class="input" id="lst-price5" type="number" placeholder="270000"/>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Harga Sewa / 7 Hari (Rp)</label>
-      <input class="input" id="lst-price7" type="number" placeholder="350000"/>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Ukuran Tersedia</label>
-      <div class="size-opts" id="size-opts">
-        <button class="size-btn" onclick="toggleSize(this,'XS')">XS</button>
-        <button class="size-btn" onclick="toggleSize(this,'S')">S</button>
-        <button class="size-btn active" onclick="toggleSize(this,'M')">M</button>
-        <button class="size-btn active" onclick="toggleSize(this,'L')">L</button>
-        <button class="size-btn" onclick="toggleSize(this,'XL')">XL</button>
-        <button class="size-btn" onclick="toggleSize(this,'XXL')">XXL</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="input-label">Deskripsi</label>
-      <textarea class="input" id="lst-desc" rows="3" placeholder="Kondisi, bahan, cocok untuk acara apa..."></textarea>
-    </div>
+    <div class="form-group"><label class="input-label">Deskripsi</label><textarea class="input" id="lst-desc" rows="2" placeholder="Kondisi, bahan, cocok untuk acara apa..."></textarea></div>
     <button class="btn-primary" onclick="submitListing()">Publish Listing →</button>
-    <div style="height:.5rem"></div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════════════════════════════════════════
-   DATA LAYER
-═══════════════════════════════════════════════ */
-const DB = {
-  get(k){try{return JSON.parse(localStorage.getItem('sw_'+k)||'null')}catch{return null}},
-  set(k,v){localStorage.setItem('sw_'+k,JSON.stringify(v))},
-};
-
-const SEED_LISTINGS = [
-  {id:'l1',name:'Midnight Blush Gown',cat:'Gaun Pesta',emoji:'👗',desc:'Gaun premium off-shoulder untuk gala, wisuda, atau pesta pernikahan. Kondisi excellent, bahan satin premium.',prices:{3:180000,5:270000,7:350000},retail:2800000,sizes:['S','M','L'],lender:'Maya R.',lenderCity:'Bandung',rating:4.9,reviews:42,hot:true,bg:'pink'},
-  {id:'l2',name:'Kebaya Modern Putih',cat:'Kebaya',emoji:'🥻',desc:'Kebaya modern cut brokat putih. Cocok wisuda, lamaran, kondangan. Dipasangkan dengan rok batik.',prices:{3:150000,5:220000,7:280000},retail:1800000,sizes:['S','M','L'],lender:'Rara A.',lenderCity:'Bandung',rating:5.0,reviews:18,new:true,bg:'purple'},
-  {id:'l3',name:'Suit Navy Slim Fit',cat:'Jas & Suit',emoji:'👔',desc:'Jas navy slim fit premium, cocok untuk interview, wisuda, atau business formal. Bahan wool blend.',prices:{3:200000,5:290000,7:380000},retail:3200000,sizes:['M','L','XL'],lender:'Budi S.',lenderCity:'Jakarta',rating:4.8,reviews:27,bg:'teal'},
-  {id:'l4',name:'Batik Prewed Set',cat:'Prewed',emoji:'👘',desc:'Set batik couple untuk prewed. Motif parang klasik. Cocok outdoor/indoor. Termasuk aksesoris.',prices:{3:250000,5:380000,7:490000},retail:4500000,sizes:['S','M','L','XL'],lender:'Dian R.',lenderCity:'Bandung',rating:4.9,reviews:33,bg:'amber'},
-  {id:'l5',name:'Evening Gown Dusty Rose',cat:'Gaun Pesta',emoji:'🩱',desc:'Gaun panjang dusty rose dengan detail flower. Cocok gala dinner, sweet seventeen, kondangan mewah.',prices:{3:160000,5:240000,7:310000},retail:2400000,sizes:['XS','S','M'],lender:'Tika M.',lenderCity:'Bandung',rating:4.7,reviews:15,bg:'pink'},
-  {id:'l6',name:'Beskap Jawa Modern',cat:'Batik',emoji:'🎎',desc:'Beskap modern kombinasi batik Jogja. Cocok untuk akad nikah, wisuda, peresmian. Termasuk blangkon.',prices:{3:180000,5:260000,7:340000},retail:2200000,sizes:['M','L','XL'],lender:'Ari W.',lenderCity:'Yogyakarta',rating:4.8,reviews:21,bg:'teal'},
-  {id:'l7',name:'Mini Dress Floral',cat:'Casual',emoji:'💃',desc:'Mini dress floral cerah. Cocok photoshoot, content creation, ootd harian. Bahan cotton nyaman.',prices:{3:80000,5:120000,7:160000},retail:650000,sizes:['XS','S','M','L'],lender:'Nadia P.',lenderCity:'Jakarta',rating:4.6,reviews:44,new:true,bg:'purple'},
-  {id:'l8',name:'Tuxedo Set Premium',cat:'Jas & Suit',emoji:'🤵',desc:'Tuxedo set lengkap (jas, celana, dasi, pocket square). Cocok wedding, gala, wisuda. Bahan wool import.',prices:{3:280000,5:420000,7:550000},retail:5500000,sizes:['M','L','XL'],lender:'Rizky A.',lenderCity:'Surabaya',rating:4.9,reviews:12,hot:true,bg:'amber'},
+/* ═══════════════════════════════════════
+   DATA
+═══════════════════════════════════════ */
+const SEEDS=[
+  {id:'l1',name:'Midnight Blush Gown',cat:'Gaun Pesta',emoji:'👗',desc:'Gaun premium off-shoulder untuk gala, wisuda, atau pesta pernikahan. Kondisi excellent, bahan satin premium.',prices:{3:180000,5:270000,7:350000},retail:2800000,sizes:['S','M','L'],lender:'Maya R.',city:'Bandung',rating:4.9,reviews:42,hot:true,bg:'#1f0818'},
+  {id:'l2',name:'Kebaya Modern Putih',cat:'Kebaya',emoji:'🥻',desc:'Kebaya modern cut brokat putih. Cocok wisuda, lamaran, kondangan. Dengan rok batik.',prices:{3:150000,5:220000,7:280000},retail:1800000,sizes:['S','M','L'],lender:'Rara A.',city:'Bandung',rating:5.0,reviews:18,new:true,bg:'#0a1020'},
+  {id:'l3',name:'Suit Navy Slim Fit',cat:'Jas & Suit',emoji:'👔',desc:'Jas navy slim fit premium, cocok untuk interview, wisuda, atau business formal. Bahan wool blend.',prices:{3:200000,5:290000,7:380000},retail:3200000,sizes:['M','L','XL'],lender:'Budi S.',city:'Jakarta',rating:4.8,reviews:27,bg:'#0a1a15'},
+  {id:'l4',name:'Batik Prewed Set',cat:'Prewed',emoji:'👘',desc:'Set batik couple untuk prewed. Motif parang klasik. Cocok outdoor/indoor.',prices:{3:250000,5:380000,7:490000},retail:4500000,sizes:['S','M','L','XL'],lender:'Dian R.',city:'Bandung',rating:4.9,reviews:33,bg:'#1a1000'},
+  {id:'l5',name:'Evening Gown Dusty Rose',cat:'Gaun Pesta',emoji:'🩱',desc:'Gaun panjang dusty rose dengan detail flower. Cocok gala dinner, sweet seventeen.',prices:{3:160000,5:240000,7:310000},retail:2400000,sizes:['XS','S','M'],lender:'Tika M.',city:'Bandung',rating:4.7,reviews:15,bg:'#1f0818'},
+  {id:'l6',name:'Beskap Jawa Modern',cat:'Batik',emoji:'🎎',desc:'Beskap modern kombinasi batik Jogja. Cocok untuk akad nikah, wisuda, peresmian.',prices:{3:180000,5:260000,7:340000},retail:2200000,sizes:['M','L','XL'],lender:'Ari W.',city:'Yogyakarta',rating:4.8,reviews:21,bg:'#0a1a15'},
+  {id:'l7',name:'Mini Dress Floral',cat:'Casual',emoji:'💃',desc:'Mini dress floral cerah. Cocok photoshoot, content creation, ootd harian.',prices:{3:80000,5:120000,7:160000},retail:650000,sizes:['XS','S','M','L'],lender:'Nadia P.',city:'Jakarta',rating:4.6,reviews:44,new:true,bg:'#0a1020'},
+  {id:'l8',name:'Tuxedo Set Premium',cat:'Jas & Suit',emoji:'🤵',desc:'Tuxedo set lengkap (jas, celana, dasi, pocket square). Cocok wedding, gala, wisuda.',prices:{3:280000,5:420000,7:550000},retail:5500000,sizes:['M','L','XL'],lender:'Rizky A.',city:'Surabaya',rating:4.9,reviews:12,hot:true,bg:'#1a1000'}
 ];
+const CATS=['Semua','Gaun Pesta','Kebaya','Batik','Jas & Suit','Prewed','Casual'];
+let activeCat='Semua',currentItem=null,selectedDur=5,wlRole='renter',regRole='renter',favs=[],fitPref='regular';
 
-function getSeedListings(){
-  const stored = DB.get('listings');
-  if(!stored||stored.length===0){DB.set('listings',SEED_LISTINGS);return SEED_LISTINGS;}
-  return stored;
-}
-
-/* ═══════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════ */
-let currentPage = 'home';
-let currentItem = null;
-let selectedDur = 5;
-let wlRole = 'renter';
-let regRole = 'renter';
-let adminFilterRole = 'all';
-let favs = DB.get('favs')||[];
-let selectedEmoji = '👗';
-let selectedSizes = ['M','L'];
-
-/* ═══════════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════════ */
-function nav(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  const bn = document.getElementById('bn-'+page);
-  if(bn) bn.classList.add('active');
-  currentPage = page;
-  window.scrollTo(0,0);
-  if(page==='browse') renderBrowse();
-  if(page==='lender') renderLender();
-  if(page==='admin') renderAdmin();
-  if(page==='home') renderWlCount();
-  const topbar = document.getElementById('topbar');
-  topbar.style.display = page==='confirm'?'none':'flex';
-}
-
-/* ═══════════════════════════════════════════════
-   AUTH
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   DB
+═══════════════════════════════════════ */
+const DB={get(k){try{return JSON.parse(localStorage.getItem('sw_'+k)||'null')}catch{return null}},set(k,v){localStorage.setItem('sw_'+k,JSON.stringify(v))}};
+function getListings(){const s=DB.get('listings');return s&&s.length?s:SEEDS;}
 function getUser(){return DB.get('user')}
 function getUsers(){return DB.get('users')||[]}
 
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+function nav(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ai-tool-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  const pg=document.getElementById('page-'+page);
+  if(pg)pg.classList.add('active');
+  const bn=document.getElementById('bn-'+page);
+  if(bn)bn.classList.add('active');
+  document.getElementById('topbar').style.display=page==='confirm'?'none':'flex';
+  if(page==='admin'){document.querySelector('[onclick="nav(\'admin\')"]') && document.querySelector('[onclick="nav(\'admin\')"]').style.setProperty('color','var(--pk)');}
+  else{const ab=document.querySelector('[onclick="nav(\'admin\')"]');if(ab)ab.style.removeProperty('color');}
+  window.scrollTo(0,0);
+  if(page==='browse')renderBrowse();
+  if(page==='lender')renderLender();
+  if(page==='admin')renderAdmin();
+  if(page==='home')renderWlCount();
+}
+
+function openAI(feature){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ai-tool-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ai-'+feature).classList.add('active');
+  document.getElementById('bn-ai').classList.add('active');
+  if(feature==='style')initStyleChat();
+  if(feature==='trend')renderTrends();
+  window.scrollTo(0,0);
+}
+
+function closeAI(){nav('ai')}
+
+/* ═══════════════════════════════════════
+   AUTH
+═══════════════════════════════════════ */
 function renderTopbarAuth(){
-  const u = getUser();
-  const el = document.getElementById('topbar-auth');
-  if(u){
-    el.innerHTML=`<div class="avatar-sm" onclick="showUserMenu()" title="${u.name}">${u.name.charAt(0).toUpperCase()}</div>`;
-  } else {
-    el.innerHTML=`<button class="btn-sm btn-pink-sm" style="border:none;border-radius:100px;padding:.4rem .85rem;font-size:.78rem" onclick="openModal('auth')">Masuk</button>`;
-  }
+  const u=getUser();
+  const el=document.getElementById('topbar-auth');
+  el.innerHTML=u
+    ?`<div style="width:32px;height:32px;border-radius:50%;background:var(--pk);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.75rem;font-weight:800;cursor:pointer" onclick="showUserMenu()" title="${u.name}">${u.name.charAt(0).toUpperCase()}</div>`
+    :`<button style="background:var(--pk);color:#fff;border:none;border-radius:100px;padding:.4rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="openModal('auth')">Masuk</button>`;
 }
-
-function openModal(type, hint){
-  document.getElementById('modal-'+type).classList.add('open');
-  if(type==='auth'&&hint==='lender') authTab('register'), setRegRole('lender');
+function openModal(t,h){
+  document.getElementById('modal-'+t).classList.add('open');
+  if(t==='auth'&&h==='lender'){authTab('register');setRegRole('lender');}
 }
-
-function closeModal(type){document.getElementById('modal-'+type).classList.remove('open')}
-function closeModalOutside(e,type){if(e.target.id==='modal-'+type) closeModal(type)}
-
+function closeModal(t){document.getElementById('modal-'+t).classList.remove('open')}
+function closeModalOutside(e,t){if(e.target.id==='modal-'+t)closeModal(t)}
 function authTab(t){
-  document.getElementById('auth-form-login').style.display=t==='login'?'block':'none';
-  document.getElementById('auth-form-register').style.display=t==='register'?'block':'none';
-  document.getElementById('auth-tab-login').className='auth-tab'+(t==='login'?' active':'');
-  document.getElementById('auth-tab-register').className='auth-tab'+(t==='register'?' active':'');
+  ['login','register'].forEach(x=>{
+    document.getElementById('auth-form-'+x).style.display=x===t?'block':'none';
+    document.getElementById('auth-tab-'+x).className='auth-tab'+(x===t?' active':'');
+  });
   document.getElementById('auth-error').style.display='none';
 }
-
 function setRegRole(r){
   regRole=r;
-  document.getElementById('role-renter').className='auth-tab'+(r==='renter'?' active':'');
-  document.getElementById('role-lender').className='auth-tab'+(r==='lender'?' active':'');
+  ['renter','lender'].forEach(x=>document.getElementById('role-'+x).className='auth-tab'+(x===r?' active':''));
 }
-
-function showAuthError(msg){
-  const el=document.getElementById('auth-error');
-  el.textContent=msg;el.style.display='block';
-}
-
+function showAuthError(m){const el=document.getElementById('auth-error');el.textContent=m;el.style.display='block';}
 function doLogin(){
-  const email=document.getElementById('login-email').value.trim();
-  const pass=document.getElementById('login-pass').value;
-  if(!email||!pass){showAuthError('Isi semua field dulu ya.');return;}
-  const users=getUsers();
-  const u=users.find(x=>x.email===email&&x.pass===pass);
+  const em=document.getElementById('login-email').value.trim();
+  const pw=document.getElementById('login-pass').value;
+  if(!em||!pw){showAuthError('Isi semua field.');return;}
+  const u=getUsers().find(x=>x.email===em&&x.pass===pw);
   if(!u){showAuthError('Email atau password salah.');return;}
-  DB.set('user',u);closeModal('auth');renderTopbarAuth();
-  toast('Selamat datang, '+u.name+' 👋');
-  renderLender();
+  DB.set('user',u);closeModal('auth');renderTopbarAuth();toast('Selamat datang, '+u.name+' 👋');
 }
-
 function doRegister(){
   const name=document.getElementById('reg-name').value.trim();
   const email=document.getElementById('reg-email').value.trim();
   const wa=document.getElementById('reg-wa').value.trim();
   const pass=document.getElementById('reg-pass').value;
-  if(!name||!email||!pass){showAuthError('Isi semua field dulu ya.');return;}
+  if(!name||!email||!pass){showAuthError('Isi semua field.');return;}
   if(pass.length<6){showAuthError('Password minimal 6 karakter.');return;}
   const users=getUsers();
   if(users.find(x=>x.email===email)){showAuthError('Email sudah terdaftar.');return;}
   const u={id:'u'+Date.now(),name,email,wa,pass,role:regRole,joined:new Date().toISOString()};
   users.push(u);DB.set('users',users);DB.set('user',u);
-  closeModal('auth');renderTopbarAuth();
-  toast('Akun berhasil dibuat! Selamat datang '+name+' 🎉');
-  if(regRole==='lender') nav('lender'); else nav('browse');
+  closeModal('auth');renderTopbarAuth();toast('Akun berhasil dibuat! 🎉');
+  if(regRole==='lender')nav('lender');else nav('browse');
 }
-
 function showUserMenu(){
   const u=getUser();
-  if(confirm('Halo '+u.name+'!\n\nRole: '+u.role+'\nEmail: '+u.email+'\n\nKeluar dari akun?')){
+  if(confirm('Halo '+u.name+'!\n\nRole: '+u.role+'\nEmail: '+u.email+'\n\nKeluar?')){
     DB.set('user',null);renderTopbarAuth();toast('Sampai jumpa! 👋');nav('home');
   }
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    BROWSE
-═══════════════════════════════════════════════ */
-const CATS = ['Semua','Gaun Pesta','Kebaya','Batik','Jas & Suit','Prewed','Casual'];
-let activeCat = 'Semua';
-
+═══════════════════════════════════════ */
 function renderBrowse(){
-  const catsEl = document.getElementById('cats-scroll');
-  catsEl.innerHTML = CATS.map(c=>`<button class="cat-btn${c===activeCat?' active':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+  document.getElementById('cats-scroll').innerHTML=CATS.map(c=>`<button class="cat-btn${c===activeCat?' active':''}" onclick="setCat('${c}')">${c}</button>`).join('');
   filterItems();
 }
-
 function setCat(c){activeCat=c;renderBrowse()}
-
 function filterItems(){
   const q=(document.getElementById('search-input')||{value:''}).value.toLowerCase();
-  const items=getSeedListings().filter(i=>{
-    const matchCat=activeCat==='Semua'||i.cat===activeCat;
-    const matchQ=!q||i.name.toLowerCase().includes(q)||i.cat.toLowerCase().includes(q)||i.desc.toLowerCase().includes(q);
-    return matchCat&&matchQ;
-  });
+  const items=getListings().filter(i=>(activeCat==='Semua'||i.cat===activeCat)&&(!q||i.name.toLowerCase().includes(q)||i.cat.toLowerCase().includes(q)));
   const grid=document.getElementById('items-grid');
   const empty=document.getElementById('items-empty');
-  if(!items.length){grid.innerHTML='';empty.classList.remove('hidden');return;}
-  empty.classList.add('hidden');
-  grid.innerHTML=items.map(i=>`
-    <div class="item-card" onclick="openDetail('${i.id}')">
-      <div class="item-thumb item-thumb-bg-${i.bg}">
-        ${i.hot?'<span class="item-hbadge hot">HOT</span>':''}
-        ${i.new?'<span class="item-hbadge new">BARU</span>':''}
-        <span>${i.emoji}</span>
-      </div>
-      <div class="item-body">
-        <div class="item-name">${i.name}</div>
-        <div class="item-price">Rp ${fmt(i.prices[3])} / 3hr</div>
-        <div class="item-meta">★ ${i.rating} · ${i.lenderCity}</div>
-      </div>
+  if(!items.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=items.map(i=>`<div class="item-card" onclick="openDetail('${i.id}')">
+    <div class="item-thumb" style="background:${i.bg||'rgba(255,31,110,.1)'}">
+      ${i.hot?'<span class="item-hbadge hot-b">HOT</span>':''}${i.new?'<span class="item-hbadge new-b">BARU</span>':''}
+      <span>${i.emoji}</span>
     </div>
-  `).join('');
+    <div class="item-body">
+      <div class="item-name">${i.name}</div>
+      <div class="item-price">Rp ${fmt(i.prices[3])} / 3hr</div>
+      <div class="item-meta">★ ${i.rating} · ${i.city}</div>
+    </div>
+  </div>`).join('');
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    DETAIL
-═══════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function openDetail(id){
-  const items=getSeedListings();
-  currentItem=items.find(i=>i.id===id);
-  if(!currentItem) return;
+  currentItem=getListings().find(i=>i.id===id);
+  if(!currentItem)return;
   selectedDur=5;
   const i=currentItem;
-
-  document.getElementById('detail-hero').style.background=`rgba(${i.bg==='pink'?'255,31,110':i.bg==='purple'?'139,92,246':i.bg==='teal'?'20,184,166':'245,158,11'},.12)`;
-  document.getElementById('detail-hero').innerHTML=`<span style="font-size:5rem">${i.emoji}</span><button class="detail-fav" onclick="toggleFav()">${favs.includes(i.id)?'❤️':'🤍'}</button>`;
-  document.getElementById('detail-cat').innerHTML=`<span class="badge badge-pink">${i.cat} · Size ${i.sizes.join('-')}</span>`;
+  document.getElementById('detail-hero').style.background=i.bg||'rgba(255,31,110,.1)';
+  document.getElementById('detail-hero').innerHTML=`<span style="font-size:5rem">${i.emoji}</span><button style="position:absolute;top:.75rem;right:1rem;background:rgba(0,0,0,.3);border:none;border-radius:50%;width:36px;height:36px;font-size:1.25rem;display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="toggleFav()">${favs.includes(i.id)?'❤️':'🤍'}</button>`;
+  document.getElementById('detail-cat').innerHTML=`<span class="badge badge-pk">${i.cat} · Size ${i.sizes.join('-')}</span>`;
   document.getElementById('detail-title').textContent=i.name;
-  document.getElementById('detail-lender-name').textContent='oleh '+i.lender+' · '+i.lenderCity;
-  document.getElementById('detail-rating').textContent='★ '+i.rating;
-  document.getElementById('detail-reviews').textContent='('+i.reviews+' ulasan)';
+  document.getElementById('detail-lender').textContent='oleh '+i.lender+' · '+i.city;
+  document.getElementById('detail-rating').textContent='★ '+i.rating+' ('+i.reviews+')';
   document.getElementById('detail-desc').textContent=i.desc;
-  document.getElementById('detail-info-grid').innerHTML=`
-    <div class="dinfo"><div class="dinfo-label">Kondisi</div><div class="dinfo-val">Excellent</div></div>
-    <div class="dinfo"><div class="dinfo-label">Ukuran</div><div class="dinfo-val">${i.sizes.join(', ')}</div></div>
-    <div class="dinfo"><div class="dinfo-label">Pengiriman</div><div class="dinfo-val">Same-day</div></div>
-    <div class="dinfo"><div class="dinfo-label">Kota</div><div class="dinfo-val">${i.lenderCity}</div></div>
-  `;
+  document.getElementById('detail-info').innerHTML=`
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.6rem .75rem"><div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Kondisi</div><div style="font-size:.82rem;font-weight:600">Excellent</div></div>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.6rem .75rem"><div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Ukuran</div><div style="font-size:.82rem;font-weight:600">${i.sizes.join(', ')}</div></div>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.6rem .75rem"><div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Pengiriman</div><div style="font-size:.82rem;font-weight:600">Same-day</div></div>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:.6rem .75rem"><div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem">Kota</div><div style="font-size:.82rem;font-weight:600">${i.city}</div></div>`;
   renderDurOpts();
   nav('detail');
 }
-
 function renderDurOpts(){
   const i=currentItem;
-  document.getElementById('dur-opts').innerHTML=[3,5,7].map(d=>`
-    <div class="dur-opt${selectedDur===d?' active':''}" onclick="selectDur(${d})">
-      ${d} hari<b>Rp ${fmt(i.prices[d])}</b>
-    </div>
-  `).join('');
+  document.getElementById('dur-opts').innerHTML=[3,5,7].map(d=>`<div class="dur-opt${selectedDur===d?' active':''}" onclick="selectDur(${d})">${d} hari<b>Rp ${fmt(i.prices[d])}</b></div>`).join('');
   const saving=Math.round((1-i.prices[selectedDur]/i.retail)*100);
   document.getElementById('detail-price').textContent='Rp '+fmt(i.prices[selectedDur]);
   document.getElementById('detail-orig').textContent='Rp '+fmt(i.retail);
   document.getElementById('detail-saving').textContent='Hemat '+saving+'% dari harga beli';
-  const fav=favs.includes(i.id);
-  document.getElementById('btn-fav-cta').textContent=fav?'❤️':'🤍';
+  document.getElementById('btn-fav').textContent=favs.includes(currentItem.id)?'❤️':'🤍';
 }
-
 function selectDur(d){selectedDur=d;renderDurOpts()}
-
 function toggleFav(){
-  if(!currentItem) return;
-  const id=currentItem.id;
-  if(favs.includes(id)) favs=favs.filter(f=>f!==id);
-  else favs.push(id);
-  DB.set('favs',favs);
-  renderDurOpts();
-  toast(favs.includes(id)?'Ditambahkan ke favorit ❤️':'Dihapus dari favorit');
+  if(!currentItem)return;
+  favs=favs.includes(currentItem.id)?favs.filter(f=>f!==currentItem.id):[...favs,currentItem.id];
+  DB.set('favs',favs);renderDurOpts();toast(favs.includes(currentItem.id)?'Ditambahkan ke favorit ❤️':'Dihapus dari favorit');
 }
-
 function bookNow(){
-  const u=getUser();
-  if(!u){openModal('auth');return;}
+  if(!getUser()){openModal('auth');return;}
   const i=currentItem;
-  const price=i.prices[selectedDur];
-  const booking={
-    id:'b'+Date.now(),
-    itemId:i.id,itemName:i.name,itemEmoji:i.emoji,
-    dur:selectedDur,price,lender:i.lender,
-    renter:u.name,renterId:u.id,
-    status:'Konfirmasi',ts:new Date().toISOString(),
-    delivery:'GoSend Same-day'
-  };
-  const bookings=DB.get('bookings')||[];
-  bookings.unshift(booking);DB.set('bookings',bookings);
-
+  const b={id:'b'+Date.now(),itemId:i.id,itemName:i.name,itemEmoji:i.emoji,dur:selectedDur,price:i.prices[selectedDur],lender:i.lender,renter:getUser().name,renterId:getUser().id,status:'Konfirmasi',ts:new Date().toISOString()};
+  const bks=DB.get('bookings')||[];bks.unshift(b);DB.set('bookings',bks);
   document.getElementById('confirm-card').innerHTML=`
-    <div class="confirm-row"><span class="cr-key">Item</span><span class="cr-val">${i.name}</span></div>
-    <div class="confirm-row"><span class="cr-key">Durasi</span><span class="cr-val">${selectedDur} hari</span></div>
-    <div class="confirm-row"><span class="cr-key">Lender</span><span class="cr-val">${i.lender}</span></div>
-    <div class="confirm-row"><span class="cr-key">Pengiriman</span><span class="cr-val">Same-day GoSend</span></div>
-    <div class="confirm-row"><span class="cr-key">Pengembalian</span><span class="cr-val">Kami jemput</span></div>
-    <div class="confirm-row"><span class="cr-key">Total</span><span class="cr-val cr-total">Rp ${fmt(price)}</span></div>
-  `;
+    <div class="confirm-row"><span style="color:var(--muted)">Item</span><span style="font-weight:600">${i.name}</span></div>
+    <div class="confirm-row"><span style="color:var(--muted)">Durasi</span><span style="font-weight:600">${selectedDur} hari</span></div>
+    <div class="confirm-row"><span style="color:var(--muted)">Lender</span><span style="font-weight:600">${i.lender}</span></div>
+    <div class="confirm-row"><span style="color:var(--muted)">Pengiriman</span><span style="font-weight:600">Same-day GoSend</span></div>
+    <div class="confirm-row"><span style="color:var(--muted)">Total</span><span style="font-weight:600;color:var(--lm);font-family:'Syne',sans-serif;font-size:1rem">Rp ${fmt(i.prices[selectedDur])}</span></div>`;
   nav('confirm');
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    LENDER DASHBOARD
-═══════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function renderLender(){
   const u=getUser();
-  const bookings=DB.get('bookings')||[];
-  const listings=getSeedListings();
-  const myBookings=u?bookings.filter(b=>b.renterId===u.id):bookings;
-  const earnings=myBookings.reduce((s,b)=>s+b.price,0);
-  const name=u?u.name:'Tamu';
-
-  document.getElementById('ld-greeting').textContent='Halo, '+name+' 👋';
-  document.getElementById('ld-stats-row').innerHTML=`
-    <div class="ld-stat"><span class="ld-stat-val lime">Rp ${earnings>0?fmt(earnings):'2.4jt'}</span><span class="ld-stat-lbl">Pendapatan</span></div>
-    <div class="ld-stat"><span class="ld-stat-val">${myBookings.length||18}</span><span class="ld-stat-lbl">Total Sewa</span></div>
-    <div class="ld-stat"><span class="ld-stat-val">${listings.length}</span><span class="ld-stat-lbl">Listing Aktif</span></div>
-    <div class="ld-stat"><span class="ld-stat-val pink">4.9 ★</span><span class="ld-stat-lbl">Rating</span></div>
-  `;
-
-  const demoBookings=[
-    {itemEmoji:'👗',itemName:'Blush Gown',dur:5,price:270000,renter:'Sarah A.',status:'Konfirmasi',ts:'2026-04-24'},
-    {itemEmoji:'🥻',itemName:'Kebaya Putih',dur:3,price:250000,renter:'Rina S.',status:'Menunggu',ts:'2026-05-02'},
-    {itemEmoji:'👔',itemName:'Batik Prewed Set',dur:7,price:490000,renter:'Dian R.',status:'Konfirmasi',ts:'2026-05-10'},
-  ];
-  const allB=[...myBookings,...(myBookings.length?[]:demoBookings)];
-
-  const statusBadge=s=>({
-    'Konfirmasi':'badge-lime','Menunggu':'badge-gray','Aktif':'badge-pink','Selesai':'badge-green'
-  })[s]||'badge-gray';
-
-  document.getElementById('lp-overview').innerHTML=`
-    <div class="section-label" style="margin-top:.25rem">Booking Terbaru</div>
-    ${allB.slice(0,3).map(b=>`
-      <div class="booking-item">
-        <div class="bi-thumb">${b.itemEmoji}</div>
-        <div class="bi-info">
-          <div class="bi-name">${b.itemName} · ${b.dur} hari</div>
-          <div class="bi-meta">${b.renter} · ${b.ts?b.ts.slice(0,10):''}</div>
-        </div>
-        <div class="bi-right">
-          <div class="bi-price">Rp ${fmt(b.price)}</div>
-          <span class="badge ${statusBadge(b.status)}" style="margin-top:.25rem;display:inline-block">${b.status}</span>
-        </div>
-      </div>
-    `).join('')}
-    <button class="btn-outline" style="margin-top:.75rem;font-size:.82rem" onclick="ldTab('bookings',document.querySelectorAll('.ld-tab')[1])">Lihat Semua Booking →</button>
-  `;
-
-  document.getElementById('lp-bookings').innerHTML=allB.length?allB.map(b=>`
-    <div class="booking-item">
-      <div class="bi-thumb">${b.itemEmoji}</div>
-      <div class="bi-info">
-        <div class="bi-name">${b.itemName} · ${b.dur} hari</div>
-        <div class="bi-meta">${b.renter}</div>
-      </div>
-      <div class="bi-right">
-        <div class="bi-price">Rp ${fmt(b.price)}</div>
-        <span class="badge ${statusBadge(b.status)}" style="margin-top:.25rem;display:inline-block">${b.status}</span>
-      </div>
-    </div>
-  `).join(''):`<div class="empty"><div class="empty-icon">📭</div><div class="empty-title">Belum ada booking</div><div class="empty-sub">Browse outfit dan buat booking pertamamu!</div></div>`;
-
-  document.getElementById('lp-listings').innerHTML=`
-    ${listings.slice(0,6).map(l=>`
-      <div class="listing-item">
-        <div class="li-thumb">${l.emoji}</div>
-        <div class="li-info">
-          <div class="li-name">${l.name}</div>
-          <div class="li-price">Rp ${fmt(l.prices[3])} / 3hr</div>
-          <div class="li-stats">★ ${l.rating} · ${l.reviews} ulasan</div>
-        </div>
-        <span class="badge badge-lime">Aktif</span>
-      </div>
-    `).join('')}
-    <button class="add-listing-btn" onclick="openAddListing()">＋ Tambah Listing Baru</button>
-  `;
-
-  const months=['Nov','Des','Jan','Feb','Mar','Apr'];
-  const vals=[800000,1100000,1400000,1600000,2100000,2400000];
-  const maxV=Math.max(...vals);
-  document.getElementById('lp-earnings').innerHTML=`
-    <div style="background:rgba(200,255,0,.06);border:1px solid rgba(200,255,0,.15);border-radius:14px;padding:1.1rem;text-align:center;margin-bottom:1rem">
-      <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:.2rem">Total 6 Bulan</div>
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--lime)">Rp 9.8jt</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem">
-      <div class="ld-stat"><span class="ld-stat-val lime">Rp 2.4jt</span><span class="ld-stat-lbl">Bulan Ini</span></div>
-      <div class="ld-stat"><span class="ld-stat-val">75–85%</span><span class="ld-stat-lbl">Porsi Lender</span></div>
-    </div>
-    <div class="section-label">Tren Bulanan</div>
-    <div class="chart-wrap">${months.map((m,i)=>{
-      const h=Math.round((vals[i]/maxV)*70)+8;
-      return`<div class="chart-col"><div class="chart-bar" style="height:${h}px" title="Rp ${fmt(vals[i])}"></div><div class="chart-lbl">${m}</div></div>`;
-    }).join('')}</div>
-  `;
+  const bks=DB.get('bookings')||[];
+  const myBks=u?bks.filter(b=>b.renterId===u.id):[];
+  const earn=myBks.reduce((s,b)=>s+b.price,0);
+  document.getElementById('ld-greeting').textContent='Halo, '+(u?u.name:'Tamu')+' 👋';
+  document.getElementById('ld-stats').innerHTML=`
+    <div class="ld-stat"><span class="ld-stat-val" style="color:var(--lm)">Rp ${earn?fmt(earn):'2.4jt'}</span><span style="font-size:.68rem;color:var(--muted);margin-top:.25rem;display:block">Pendapatan</span></div>
+    <div class="ld-stat"><span class="ld-stat-val">${myBks.length||18}</span><span style="font-size:.68rem;color:var(--muted);margin-top:.25rem;display:block">Total Sewa</span></div>
+    <div class="ld-stat"><span class="ld-stat-val">${getListings().length}</span><span style="font-size:.68rem;color:var(--muted);margin-top:.25rem;display:block">Listing</span></div>
+    <div class="ld-stat"><span class="ld-stat-val" style="color:var(--pk)">4.9 ★</span><span style="font-size:.68rem;color:var(--muted);margin-top:.25rem;display:block">Rating</span></div>`;
+  const demo=[{itemEmoji:'👗',itemName:'Blush Gown',dur:5,price:270000,renter:'Sarah A.',status:'Konfirmasi'},{itemEmoji:'🥻',itemName:'Kebaya Putih',dur:3,price:250000,renter:'Rina S.',status:'Menunggu'},{itemEmoji:'👔',itemName:'Batik Set',dur:7,price:490000,renter:'Dian R.',status:'Konfirmasi'}];
+  const allB=[...myBks,...(!myBks.length?demo:[])];
+  const sbadge=s=>({'Konfirmasi':'badge-lm','Menunggu':'badge-gy','Aktif':'badge-pk','Selesai':'badge-lm'})[s]||'badge-gy';
+  document.getElementById('lp-overview').innerHTML=`<div class="section-label">Booking Terbaru</div>${allB.slice(0,3).map(b=>`<div class="booking-item"><div class="bi-thumb">${b.itemEmoji}</div><div style="flex:1;min-width:0"><div style="font-size:.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${b.itemName} · ${b.dur} hari</div><div style="font-size:.72rem;color:var(--muted);margin-top:.1rem">${b.renter}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--lm)">Rp ${fmt(b.price)}</div><span class="badge ${sbadge(b.status)}" style="margin-top:.25rem;display:inline-block">${b.status}</span></div></div>`).join('')}<button class="btn-outline" style="margin-top:.75rem;font-size:.82rem" onclick="ldTab('bookings',document.querySelectorAll('.ld-tab')[1])">Lihat Semua →</button><div style="margin-top:1.25rem;background:rgba(255,31,110,.08);border:1px solid rgba(255,31,110,.15);border-radius:14px;padding:1rem;text-align:center"><div style="font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:.5rem">Mau tingkatkan listing dengan WEARBOT?</div><button style="background:transparent;border:1px solid var(--pk);color:var(--pk);border-radius:100px;padding:.5rem 1.25rem;font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif" onclick="nav('ai')">🤖 Buka WEARBOT →</button></div>`;
+  document.getElementById('lp-bookings').innerHTML=allB.length?allB.map(b=>`<div class="booking-item"><div class="bi-thumb">${b.itemEmoji}</div><div style="flex:1;min-width:0"><div style="font-size:.85rem;font-weight:600">${b.itemName} · ${b.dur} hari</div><div style="font-size:.72rem;color:var(--muted);margin-top:.1rem">${b.renter}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--lm)">Rp ${fmt(b.price)}</div><span class="badge ${sbadge(b.status)}" style="margin-top:.25rem;display:inline-block">${b.status}</span></div></div>`).join(''):'<div class="empty"><div style="font-size:2rem;margin-bottom:.5rem">📭</div><div style="font-family:Syne,sans-serif;font-weight:800">Belum ada booking</div></div>';
+  document.getElementById('lp-listings').innerHTML=getListings().slice(0,6).map(l=>`<div class="booking-item"><div class="bi-thumb">${l.emoji}</div><div style="flex:1"><div style="font-size:.85rem;font-weight:600">${l.name}</div><div style="font-size:.72rem;color:var(--pk);font-weight:600;margin-top:.1rem">Rp ${fmt(l.prices[3])} / 3hr</div><div style="font-size:.65rem;color:var(--muted)">★ ${l.rating} · ${l.reviews} ulasan</div></div><span class="badge badge-lm">Aktif</span></div>`).join('')+`<button class="btn-outline" style="margin-top:.75rem;font-size:.82rem" onclick="openAddListing()">+ Tambah Listing</button>`;
+  const months=['Nov','Des','Jan','Feb','Mar','Apr'];const vals=[800,1100,1400,1600,2100,2400];const maxV=Math.max(...vals);
+  document.getElementById('lp-earnings').innerHTML=`<div style="background:rgba(200,255,0,.06);border:1px solid rgba(200,255,0,.15);border-radius:14px;padding:1.1rem;text-align:center;margin-bottom:1rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:.2rem">Total 6 Bulan</div><div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--lm)">Rp 9.8jt</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem"><div class="ld-stat"><span class="ld-stat-val" style="color:var(--lm)">Rp 2.4jt</span><span style="font-size:.68rem;color:var(--muted);display:block;margin-top:.25rem">Bulan Ini</span></div><div class="ld-stat"><span class="ld-stat-val">75–85%</span><span style="font-size:.68rem;color:var(--muted);display:block;margin-top:.25rem">Porsi Lender</span></div></div><div class="section-label">Tren Bulanan</div><div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin-top:.75rem">${months.map((m,i)=>{const h=Math.round((vals[i]/maxV)*70)+8;return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:100%;border-radius:3px 3px 0 0;background:rgba(255,31,110,.4);height:${h}px;transition:background .2s;cursor:pointer" title="Rp ${vals[i]}K" onmouseover="this.style.background='#FF1F6E'" onmouseout="this.style.background='rgba(255,31,110,.4)'"></div><span style="font-size:.58rem;color:var(--muted)">${m}</span></div>`;}).join('')}</div>`;
 }
-
-function ldTab(tab, el){
-  document.querySelectorAll('.ld-panel').forEach(p=>p.classList.remove('active'));
+function ldTab(tab,el){
+  document.querySelectorAll('.ld-panel').forEach(p=>p.style.display='none');
   document.querySelectorAll('.ld-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('lp-'+tab).classList.add('active');
-  if(el) el.classList.add('active');
+  document.getElementById('lp-'+tab).style.display='block';
+  if(el)el.classList.add('active');
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    ADD LISTING
-═══════════════════════════════════════════════ */
-const EMOJIS=['👗','🥻','👘','👔','🤵','🩱','👙','🧥','💃','🎎'];
-
-function openAddListing(){
-  const u=getUser();
-  if(!u){openModal('auth','lender');return;}
-  document.getElementById('emoji-picker').innerHTML=EMOJIS.map(e=>`
-    <div class="emoji-opt${e===selectedEmoji?' active':''}" onclick="pickEmoji('${e}',this)">${e}</div>
-  `).join('');
-  openModal('listing');
-}
-
-function pickEmoji(e,el){
-  selectedEmoji=e;
-  document.querySelectorAll('.emoji-opt').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');
-}
-
-function toggleSize(el,s){
-  el.classList.toggle('active');
-  if(selectedSizes.includes(s)) selectedSizes=selectedSizes.filter(x=>x!==s);
-  else selectedSizes.push(s);
-}
-
+═══════════════════════════════════════ */
+function openAddListing(){if(!getUser()){openModal('auth','lender');return;}openModal('listing');}
 function submitListing(){
-  const u=getUser();
-  if(!u) return;
+  if(!getUser())return;
   const name=document.getElementById('lst-name').value.trim();
-  const p3=parseInt(document.getElementById('lst-price3').value)||150000;
-  const p5=parseInt(document.getElementById('lst-price5').value)||220000;
-  const p7=parseInt(document.getElementById('lst-price7').value)||290000;
-  const cat=document.getElementById('lst-cat').value;
-  const desc=document.getElementById('lst-desc').value.trim()||'Outfit berkualitas siap disewa.';
-  if(!name){toast('Isi nama outfit dulu ya!');return;}
-  const listing={
-    id:'l'+Date.now(),name,cat,emoji:selectedEmoji,
-    desc,prices:{3:p3,5:p5,7:p7},retail:p5*10,
-    sizes:selectedSizes.length?[...selectedSizes]:['M','L'],
-    lender:u.name,lenderCity:'Indonesia',
-    rating:5.0,reviews:0,bg:'pink'
-  };
-  const listings=getSeedListings();
-  listings.unshift(listing);DB.set('listings',listings);
-  closeModal('listing');toast('Listing berhasil dipublish! 🎉');
-  renderLender();renderBrowse();
+  if(!name){toast('Isi nama outfit dulu!');return;}
+  const l={id:'l'+Date.now(),name,cat:document.getElementById('lst-cat').value,emoji:'👗',desc:document.getElementById('lst-desc').value||'Outfit berkualitas siap disewa.',prices:{3:parseInt(document.getElementById('lst-p3').value)||150000,5:parseInt(document.getElementById('lst-p5').value)||220000,7:parseInt(document.getElementById('lst-p7').value)||290000},retail:500000,sizes:['M','L'],lender:getUser().name,city:'Indonesia',rating:5.0,reviews:0,bg:'rgba(255,31,110,.1)'};
+  const ls=getListings();ls.unshift(l);DB.set('listings',ls);
+  closeModal('listing');toast('Listing berhasil dipublish! 🎉');renderLender();renderBrowse();
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    WAITLIST
-═══════════════════════════════════════════════ */
-function setWlRole(r){
-  wlRole=r;
-  document.getElementById('wl-btn-lender').className='wl-tb'+(r==='lender'?' active':'');
-  document.getElementById('wl-btn-renter').className='wl-tb'+(r==='renter'?' active':'');
-}
-
+═══════════════════════════════════════ */
+function setWlRole(r){wlRole=r;['lender','renter'].forEach(x=>document.getElementById('wl-btn-'+x).className='wl-tb'+(x===r?' active':''))}
 function submitWaitlist(){
   const name=document.getElementById('wl-name').value.trim();
   const contact=document.getElementById('wl-contact').value.trim();
-  if(!name||!contact){toast('Isi nama dan kontak dulu ya!');return;}
-  const list=DB.get('waitlist')||[];
-  list.push({name,contact,role:wlRole,ts:new Date().toISOString()});
-  DB.set('waitlist',list);
+  if(!name||!contact){toast('Isi nama dan kontak dulu!');return;}
+  const list=DB.get('waitlist')||[];list.push({name,contact,role:wlRole,ts:new Date().toISOString()});DB.set('waitlist',list);
   document.getElementById('wl-success').style.display='block';
-  document.getElementById('wl-name').value='';
-  document.getElementById('wl-contact').value='';
+  document.getElementById('wl-name').value='';document.getElementById('wl-contact').value='';
   renderWlCount();
 }
-
 function renderWlCount(){
   const list=DB.get('waitlist')||[];
-  const el=document.getElementById('wl-count');
-  if(!el) return;
-  if(!list.length){el.textContent='Jadilah yang pertama daftar!';return;}
-  const l=list.filter(x=>x.role==='lender').length;
-  const r=list.filter(x=>x.role==='renter').length;
-  el.textContent=`${list.length} orang sudah daftar · ${l} lender · ${r} renter`;
+  const el=document.getElementById('wl-count');if(!el)return;
+  const l=list.filter(x=>x.role==='lender').length;const r=list.filter(x=>x.role==='renter').length;
+  el.textContent=list.length?`${list.length} orang sudah daftar · ${l} lender · ${r} renter`:'Jadilah yang pertama daftar!';
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    ADMIN
-═══════════════════════════════════════════════ */
+═══════════════════════════════════════ */
+let adminFilter_='all';
 function renderAdmin(){
-  const waitlist=DB.get('waitlist')||[];
-  const bookings=DB.get('bookings')||[];
-  const users=getUsers();
+  const wl=DB.get('waitlist')||[];const bks=DB.get('bookings')||[];const us=getUsers();
   document.getElementById('admin-stats').innerHTML=`
-    <div class="ast"><div class="ast-v">${waitlist.length}</div><div class="ast-l">Waitlist</div></div>
-    <div class="ast"><div class="ast-v">${bookings.length}</div><div class="ast-l">Bookings</div></div>
-    <div class="ast"><div class="ast-v">${users.length}</div><div class="ast-l">Users</div></div>
-  `;
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:.7rem;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--lm)">${wl.length}</div><div style="font-size:.62rem;color:var(--muted);margin-top:.1rem">Waitlist</div></div>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:.7rem;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--lm)">${bks.length}</div><div style="font-size:.62rem;color:var(--muted);margin-top:.1rem">Bookings</div></div>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:.7rem;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--lm)">${us.length}</div><div style="font-size:.62rem;color:var(--muted);margin-top:.1rem">Users</div></div>`;
   renderAdminTable();
 }
-
 function adminFilter(f,el){
-  adminFilterRole=f;
-  document.querySelectorAll('[onclick^="adminFilter"]').forEach(b=>{b.style.color='';b.style.borderColor='';b.style.background='transparent'});
-  el.style.color='var(--pink)';el.style.borderColor='var(--pink)';
+  adminFilter_=f;
+  document.querySelectorAll('[onclick^="adminFilter"]').forEach(b=>{b.style.color='';b.style.borderColor=''});
+  el.style.color='var(--pk)';el.style.borderColor='var(--pk)';
   renderAdminTable();
 }
-
 function renderAdminTable(){
-  const list=(DB.get('waitlist')||[]).filter(e=>adminFilterRole==='all'||e.role===adminFilterRole);
+  const list=(DB.get('waitlist')||[]).filter(e=>adminFilter_==='all'||e.role===adminFilter_);
   const el=document.getElementById('admin-table');
-  if(!list.length){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div><div class="empty-title">Belum ada data</div></div>';return;}
-  el.innerHTML=list.map((e,i)=>`
-    <div class="at-row">
-      <span style="color:var(--text-muted);font-size:.7rem;min-width:20px">${i+1}</span>
-      <span class="at-name">${e.name}</span>
-      <span class="at-contact">${e.contact}</span>
-      <span class="badge ${e.role==='lender'?'badge-pink':'badge-gray'}">${e.role}</span>
-      <button class="at-del" onclick="adminDelete(${i})">✕</button>
-    </div>
-  `).join('');
+  if(!list.length){el.innerHTML='<div class="empty"><div style="font-size:2rem;margin-bottom:.5rem">📭</div><div style="font-family:Syne,sans-serif;font-weight:800">Belum ada data</div></div>';return;}
+  el.innerHTML=list.map((e,i)=>`<div class="at-row"><span style="color:var(--muted);font-size:.7rem;min-width:20px">${i+1}</span><span style="flex:1;font-weight:600">${e.name}</span><span style="flex:1;color:var(--muted);font-size:.72rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.contact}</span><span class="badge ${e.role==='lender'?'badge-pk':'badge-gy'}">${e.role}</span><button style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;padding:.2rem" onclick="adminDelete(${i})">✕</button></div>`).join('');
 }
-
 function adminDelete(i){
-  const list=DB.get('waitlist')||[];
-  const filtered=adminFilterRole==='all'?list:list.filter(e=>e.role===adminFilterRole);
-  const toRemove=filtered[i];
-  const updated=list.filter(e=>!(e.name===toRemove.name&&e.contact===toRemove.contact));
-  DB.set('waitlist',updated);renderAdmin();
+  const list=DB.get('waitlist')||[];const filtered=adminFilter_==='all'?list:list.filter(e=>e.role===adminFilter_);
+  const toRemove=filtered[i];DB.set('waitlist',list.filter(e=>!(e.name===toRemove.name&&e.contact===toRemove.contact)));renderAdmin();
 }
-
 function adminAdd(){
-  const name=document.getElementById('adm-name').value.trim();
-  const contact=document.getElementById('adm-contact').value.trim();
-  const role=document.getElementById('adm-role').value;
+  const name=document.getElementById('adm-name').value.trim();const contact=document.getElementById('adm-contact').value.trim();const role=document.getElementById('adm-role').value;
   if(!name||!contact){toast('Isi nama dan kontak!');return;}
-  const list=DB.get('waitlist')||[];
-  list.unshift({name,contact,role,ts:new Date().toISOString()});
-  DB.set('waitlist',list);
-  document.getElementById('adm-name').value='';
-  document.getElementById('adm-contact').value='';
+  const list=DB.get('waitlist')||[];list.unshift({name,contact,role,ts:new Date().toISOString()});DB.set('waitlist',list);
+  document.getElementById('adm-name').value='';document.getElementById('adm-contact').value='';
   renderAdmin();toast('Berhasil ditambahkan! ✓');
 }
-
 function exportCSV(){
   const list=DB.get('waitlist')||[];
-  const rows=[['Nama','Kontak','Role','Waktu Daftar'],...list.map(e=>[e.name,e.contact,e.role,e.ts])];
-  const csv=rows.map(r=>r.join(',')).join('\n');
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='swapwear-waitlist.csv';a.click();
+  const csv=[['Nama','Kontak','Role','Waktu'],...list.map(e=>[e.name,e.contact,e.role,e.ts])].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='swapwear-waitlist.csv';a.click();
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
+   CLAUDE API
+═══════════════════════════════════════ */
+const MODEL='claude-sonnet-4-20250514';
+const LISTINGS_CONTEXT=getListings().map(l=>`- ${l.name} (${l.cat}): Rp ${fmt(l.prices[3])}/3hr, Rp ${fmt(l.prices[5])}/5hr, Rp ${fmt(l.prices[7])}/7hr. Ukuran: ${l.sizes.join(',')}. Kota: ${l.city}. Rating: ${l.rating}. ${l.desc}`).join('\n');
+
+async function callClaude(messages,system,maxT=800){
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:maxT,system,messages})});
+  const d=await r.json();
+  return d.content.map(c=>c.text||'').join('');
+}
+
+function showThinking(id){document.getElementById(id).style.display='flex'}
+function hideThinking(id){document.getElementById(id).style.display='none'}
+function showResult(id,content){
+  const el=document.getElementById(id);el.classList.add('show');
+  document.getElementById(id.replace('-result','-content')||id).textContent=content;
+}
+
+/* 1. STYLE AI CHAT */
+let styleHistory=[];
+function initStyleChat(){
+  styleHistory=[];
+  const chat=document.getElementById('style-chat');
+  chat.innerHTML='';
+  addChatBubble('ai','Halo! Aku WEARBOT 👗✨\n\nCeritakan kebutuhanmu dan aku akan rekomendasikan outfit terbaik. Mulai dari: untuk acara apa, ukuran kamu berapa, dan budget yang kamu punya?');
+}
+function addChatBubble(role,text){
+  const chat=document.getElementById('style-chat');
+  const div=document.createElement('div');
+  div.className='chat-bubble chat-'+role;
+  div.textContent=text;
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
+}
+async function sendStyle(){
+  const input=document.getElementById('style-input');
+  const msg=input.value.trim();if(!msg)return;
+  input.value='';
+  addChatBubble('user',msg);
+  styleHistory.push({role:'user',content:msg});
+  showThinking('style-thinking');
+  try{
+    const resp=await callClaude(styleHistory,`Kamu adalah Style AI untuk SWAPWEAR, platform P2P fashion rental Indonesia. Berikan rekomendasi outfit yang personal, hangat, dan spesifik dari koleksi SWAPWEAR.\n\nKoleksi yang tersedia:\n${LISTINGS_CONTEXT}\n\nInstruksi:\n- Selalu rekomendasikan 2-3 outfit spesifik dari koleksi di atas\n- Sebutkan nama item, harga, dan alasan cocok\n- Gunakan bahasa Indonesia yang friendly dan natural\n- Jika perlu info tambahan, tanya dengan sopan\n- Maksimal 200 kata per respons`,600);
+    styleHistory.push({role:'assistant',content:resp});
+    addChatBubble('ai',resp);
+  }catch(e){addChatBubble('ai','Maaf, ada gangguan koneksi. Coba lagi ya! 🙏');}
+  hideThinking('style-thinking');
+}
+
+/* 2. OCCASION AI */
+async function runOccasion(){
+  const input=document.getElementById('occasion-input').value.trim();
+  if(!input){toast('Deskripsikan acaramu dulu!');return;}
+  showThinking('occasion-thinking');
+  document.getElementById('occasion-result').classList.remove('show');
+  try{
+    const resp=await callClaude([{role:'user',content:`Acara: ${input}`}],`Kamu adalah kurator fashion untuk SWAPWEAR. Berikan rekomendasi outfit berdasarkan deskripsi acara user.\n\nKoleksi tersedia:\n${LISTINGS_CONTEXT}\n\nFormat respons:\n1. Analisis singkat acara (1-2 kalimat)\n2. Rekomendasi Utama: [Nama Item] - Rp [harga] - [alasan]\n3. Alternatif 1: [Nama Item] - [alasan]\n4. Alternatif 2: [Nama Item] - [alasan]\n5. Tips styling singkat\n\nGunakan bahasa Indonesia yang ramah. Maksimal 200 kata.`);
+    document.getElementById('occasion-content').textContent=resp;
+    document.getElementById('occasion-result').classList.add('show');
+  }catch(e){toast('Gagal menganalisis. Coba lagi!');}
+  hideThinking('occasion-thinking');
+}
+
+/* 3. WARDROBE CALCULATOR */
+async function runCalculator(){
+  const items=document.getElementById('calc-input').value.trim();
+  const city=document.getElementById('calc-city').value;
+  if(!items){toast('Deskripsikan item di lemarimu!');return;}
+  showThinking('calc-thinking');
+  document.getElementById('calc-result').classList.remove('show');
+  try{
+    const resp=await callClaude([{role:'user',content:`Item di lemari:\n${items}\nLokasi: ${city}`}],`Kamu adalah konsultan bisnis SWAPWEAR yang menghitung potensi penghasilan lender. Analisis item yang disebutkan dan berikan estimasi realistis.\n\nData pasar SWAPWEAR:\n- Take rate lender: 75-85% dari harga sewa\n- Harga sewa rata-rata: kebaya Rp 150-250K/3hr, gaun Rp 180-280K/3hr, jas Rp 200-350K/3hr, batik Rp 200-300K/3hr\n- Rata-rata sewa per item per bulan: 3-6 kali\n- Musim peak: wisuda (Juni-Juli), lebaran, akhir tahun\n\nFormat respons:\n📊 RINGKASAN LEMARIMU\n[jumlah item teridentifikasi]\n\n💰 ESTIMASI PENGHASILAN BULANAN\nTotal: Rp [range min] - Rp [range max]\n\n📋 BREAKDOWN PER ITEM\n[item]: Rp [estimasi]/bulan\n\n🚀 ITEM PALING POTENSIAL\n[nama item dan alasannya]\n\n💡 TIPS MAKSIMALKAN PENGHASILAN\n[2-3 tips singkat]\n\nGunakan bahasa Indonesia. Realistis dan spesifik.`);
+    document.getElementById('calc-content').textContent=resp;
+    document.getElementById('calc-result').classList.add('show');
+  }catch(e){toast('Gagal menghitung. Coba lagi!');}
+  hideThinking('calc-thinking');
+}
+
+/* 4. AI PRICING */
+async function runPricing(){
+  const name=document.getElementById('pricing-name').value.trim();
+  if(!name){toast('Isi nama item dulu!');return;}
+  const cat=document.getElementById('pricing-cat').value;
+  const cond=document.getElementById('pricing-cond').value;
+  const retail=document.getElementById('pricing-retail').value||'1500000';
+  showThinking('pricing-thinking');
+  document.getElementById('pricing-result').classList.remove('show');
+  document.getElementById('pricing-suggestion').style.display='none';
+  try{
+    const resp=await callClaude([{role:'user',content:`Item: ${name}\nKategori: ${cat}\nKondisi: ${cond}\nHarga beli asli: Rp ${retail}`}],`Kamu adalah pricing analyst SWAPWEAR. Berikan rekomendasi harga sewa optimal.\n\nData pasar SWAPWEAR saat ini:\n${LISTINGS_CONTEXT}\n\nAturan pricing SWAPWEAR:\n- Harga sewa ideal: 8-15% dari harga retail per 3 hari\n- Harga 5hr = 1.4-1.5x harga 3hr\n- Harga 7hr = 1.8-2x harga 3hr\n- Kondisi excellent: premium 10-20%\n- Kondisi good: standard\n- Kondisi fair: diskon 10-15%\n\nBerikan respons dalam format PERSIS ini (penting untuk parsing):\nHARGA_3HR: [angka tanpa titik/koma]\nHARGA_5HR: [angka]\nHARGA_7HR: [angka]\nANALISIS: [penjelasan 3-4 kalimat mengapa harga ini tepat, potensi pendapatan, dan tips]\n\nGunakan bahasa Indonesia.`,500);
+    const h3=resp.match(/HARGA_3HR:\s*(\d+)/)?.[1];
+    const h5=resp.match(/HARGA_5HR:\s*(\d+)/)?.[1];
+    const h7=resp.match(/HARGA_7HR:\s*(\d+)/)?.[1];
+    const analisis=resp.match(/ANALISIS:\s*([\s\S]+)/)?.[1]||resp;
+    if(h3&&h5&&h7){
+      document.getElementById('ps-grid').innerHTML=`<div class="ps-item"><div class="ps-dur">3 Hari</div><div class="ps-price">Rp ${fmt(parseInt(h3))}</div></div><div class="ps-item"><div class="ps-dur">5 Hari</div><div class="ps-price">Rp ${fmt(parseInt(h5))}</div></div><div class="ps-item"><div class="ps-dur">7 Hari</div><div class="ps-price">Rp ${fmt(parseInt(h7))}</div></div>`;
+      document.getElementById('pricing-suggestion').style.display='block';
+    }
+    document.getElementById('pricing-content').textContent=analisis.trim();
+    document.getElementById('pricing-result').classList.add('show');
+  }catch(e){toast('Gagal menganalisis. Coba lagi!');}
+  hideThinking('pricing-thinking');
+}
+
+/* 5. DAMAGE DETECTION */
+let imgBeforeB64=null,imgAfterB64=null;
+function previewImg(input,previewId){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=document.getElementById(previewId);img.src=e.target.result;img.style.display='block';
+    const b64=e.target.result.split(',')[1];
+    if(previewId==='prev-before')imgBeforeB64=b64;else imgAfterB64=b64;
+  };
+  reader.readAsDataURL(file);
+}
+async function runDamage(){
+  const name=document.getElementById('damage-name').value||'Item';
+  showThinking('damage-thinking');
+  document.getElementById('damage-result').classList.remove('show');
+  try{
+    let messages,system;
+    if(imgBeforeB64&&imgAfterB64){
+      messages=[{role:'user',content:[
+        {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imgBeforeB64}},
+        {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imgAfterB64}},
+        {type:'text',text:`Bandingkan kondisi ${name} dari foto SEBELUM (foto pertama) dan SETELAH disewa (foto kedua). Analisis apakah ada kerusakan.`}
+      ]}];
+      system=`Kamu adalah damage assessment AI untuk SWAPWEAR. Bandingkan dua foto item fashion — sebelum dan sesudah disewa.\n\nAnalisis:\n1. Status kondisi: TIDAK ADA KERUSAKAN / KERUSAKAN MINOR / KERUSAKAN SIGNIFIKAN\n2. Detail perbandingan kondisi\n3. Rekomendasi tindakan\n4. Estimasi biaya perbaikan (jika ada)\n\nGunakan bahasa Indonesia yang objektif dan profesional.`;
+    }else{
+      messages=[{role:'user',content:`Analisis kerusakan untuk item: ${name}. Tidak ada foto yang diupload — berikan panduan cara melakukan damage assessment manual.`}];
+      system='Kamu adalah damage assessment AI untuk SWAPWEAR. Karena foto tidak tersedia, berikan panduan lengkap cara melakukan damage assessment manual untuk item fashion rental. Gunakan bahasa Indonesia.';
+    }
+    const resp=await callClaude(messages,system);
+    document.getElementById('damage-content').textContent=resp;
+    document.getElementById('damage-result').classList.add('show');
+  }catch(e){toast('Gagal menganalisis. Coba lagi!');}
+  hideThinking('damage-thinking');
+}
+
+/* 6. SIZE MATCHING */
+function setFit(f,el){fitPref=f;document.querySelectorAll('[id^="fit-"]').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+async function runSizing(){
+  const h=document.getElementById('sz-height').value;const w=document.getElementById('sz-weight').value;
+  const c=document.getElementById('sz-chest').value;const ws=document.getElementById('sz-waist').value;
+  const type=document.getElementById('sz-type').value;
+  if(!h||!w){toast('Isi tinggi dan berat badan minimal!');return;}
+  showThinking('sizing-thinking');
+  document.getElementById('sizing-result').classList.remove('show');
+  try{
+    const resp=await callClaude([{role:'user',content:`Tinggi: ${h}cm, Berat: ${w}kg${c?', Lingkar dada: '+c+'cm':''}${ws?', Lingkar pinggang: '+ws+'cm':''}\nTipe outfit: ${type}\nPreferensi fit: ${fitPref}`}],`Kamu adalah size matching AI untuk SWAPWEAR. Bantu user temukan ukuran dan outfit yang cocok.\n\nKoleksi tersedia:\n${LISTINGS_CONTEXT}\n\nPanduan ukuran Indonesia umum:\n- XS: TB 150-155cm, BB 40-45kg\n- S: TB 155-160cm, BB 45-52kg\n- M: TB 160-165cm, BB 52-60kg\n- L: TB 165-170cm, BB 60-68kg\n- XL: TB 170-175cm, BB 68-78kg\n\nFormat:\n📏 UKURAN YANG DISARANKAN\n[ukuran dan penjelasan]\n\n✅ OUTFIT YANG COCOK UNTUKMU\n[3 outfit spesifik dari koleksi + alasan]\n\n💡 TIPS FIT\n[tips styling berdasarkan body type]\n\nGunakan bahasa Indonesia yang ramah.`);
+    document.getElementById('sizing-content').textContent=resp;
+    document.getElementById('sizing-result').classList.add('show');
+  }catch(e){toast('Gagal menganalisis. Coba lagi!');}
+  hideThinking('sizing-thinking');
+}
+
+/* 7. TREND FORECAST */
+async function runTrend(){
+  const city=document.getElementById('trend-city').value;const period=document.getElementById('trend-period').value;
+  document.getElementById('trend-period-label').textContent=period;
+  showThinking('trend-thinking');
+  document.getElementById('trend-result').classList.remove('show');
+  try{
+    const resp=await callClaude([{role:'user',content:`Kota: ${city}\nPeriode: ${period}`}],`Kamu adalah trend analyst untuk SWAPWEAR. Prediksi tren fashion rental berdasarkan kalender event dan data pasar.\n\nKoleksi SWAPWEAR:\n${LISTINGS_CONTEXT}\n\nKalender event Indonesia 2026:\n- Mei-Juni: Wisuda semester genap (ITB, UI, UGM, dll)\n- Juni-Juli: Peak wisuda, mulai musim nikah\n- Juli-Agustus: Wedding season peak\n- Agustus: HUT RI, formal events\n- September-Oktober: Musim prewed\n- November-Desember: Gala dinner season, akhir tahun\n\nFormat respons:\n📈 PREDIKSI TREN ${period.toUpperCase()}\n\n🔥 TOP 3 KATEGORI TRENDING\n1. [Kategori] — demand naik [%] — Alasan: [event/musim]\n2. [Kategori] — demand naik [%]\n3. [Kategori] — demand naik [%]\n\n💡 ITEM PALING POTENSIAL\n[3 item spesifik dari koleksi yang akan laris]\n\n📅 EVENT YANG MENDRIVE DEMAND\n[daftar event relevan di periode tersebut]\n\n🎯 REKOMENDASI UNTUK LENDER\n[2-3 action items]\n\nGunakan bahasa Indonesia.`,600);
+    document.getElementById('trend-content').textContent=resp;
+    document.getElementById('trend-result').classList.add('show');
+  }catch(e){toast('Gagal menganalisis. Coba lagi!');}
+  hideThinking('trend-thinking');
+}
+
+/* 8. CONTENT GENERATOR */
+async function runContent(){
+  const desc=document.getElementById('content-input').value.trim();
+  if(!desc){toast('Deskripsikan itemmu dulu!');return;}
+  const cat=document.getElementById('content-cat').value;const target=document.getElementById('content-target').value;
+  showThinking('content-thinking');
+  document.getElementById('content-result').classList.remove('show');
+  try{
+    const resp=await callClaude([{role:'user',content:`Deskripsi singkat: ${desc}\nKategori: ${cat}\nTarget: ${target}`}],`Kamu adalah copywriter profesional untuk SWAPWEAR. Tulis deskripsi listing yang menarik, informatif, dan profesional.\n\nStruktur deskripsi yang baik:\n1. Kalimat pembuka yang catchy dan deskriptif\n2. Detail item (bahan, warna, ukuran, kondisi)\n3. Cocok untuk acara apa\n4. Keunggulan item\n5. Informasi praktis (ukuran, kondisi)\n\nGaya penulisan:\n- Bahasa Indonesia yang hangat dan persuasif\n- Tidak berlebihan/hiperbola\n- Spesifik dan informatif\n- 80-120 kata\n- Gunakan emoji secukupnya di akhir\n\nHanya tulis deskripsinya saja, tanpa penjelasan tambahan.`,400);
+    document.getElementById('content-output').textContent=resp;
+    document.getElementById('content-result').classList.add('show');
+  }catch(e){toast('Gagal generate. Coba lagi!');}
+  hideThinking('content-thinking');
+}
+function copyContent(){
+  const text=document.getElementById('content-output').textContent;
+  navigator.clipboard.writeText(text).then(()=>toast('Deskripsi berhasil di-copy! 📋'));
+}
+
+/* ═══════════════════════════════════════
    UTILS
-═══════════════════════════════════════════════ */
-function fmt(n){
-  if(n>=1000000) return (n/1000000).toFixed(1).replace('.0','')+'jt';
-  if(n>=1000) return Math.round(n/1000)+'K';
-  return n.toString();
-}
-
+═══════════════════════════════════════ */
+function fmt(n){if(n>=1000000)return(n/1000000).toFixed(1).replace('.0','')+'jt';if(n>=1000)return Math.round(n/1000)+'K';return n.toString();}
 let toastTimer;
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.remove('show'),2800);
-}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2800);}
 
-/* ═══════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════ */
-getSeedListings();
+/* INIT */
 renderTopbarAuth();
+renderWlCount();
+favs=DB.get('favs')||[];
 nav('home');
 </script>
 </body>
