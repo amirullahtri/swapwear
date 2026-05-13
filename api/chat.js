@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
     }
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,22 +36,18 @@ module.exports = async function handler(req, res) {
     );
 
     const data = await response.json();
-    console.log('Gemini response:', JSON.stringify(data).substring(0, 500));
+    console.log('Status:', response.status, 'Keys:', Object.keys(data));
 
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
     if (!text) {
-      console.log('No text found, data keys:', Object.keys(data));
+      console.log('Error:', JSON.stringify(data.error));
       return res.status(200).json({
         content: [{ type: 'text', text: 'Maaf, WEARBOT sedang tidak bisa menjawab. Coba lagi! 🙏' }]
       });
     }
 
-    return res.status(200).json({
-      content: [{ type: 'text', text }]
-    });
+    return res.status(200).json({ content: [{ type: 'text', text }] });
   } catch (error) {
-    console.log('Error:', error.message);
     return res.status(500).json({ error: error.message });
   }
 }
