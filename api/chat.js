@@ -14,9 +14,10 @@ module.exports = async function handler(req, res) {
 
   try {
     let body = req.body;
-    if (typeof body === 'string') {
-      body = JSON.parse(body);
-    }
+    if (typeof body === 'string') body = JSON.parse(body);
+
+    console.log('MODEL:', body?.model);
+    console.log('API KEY starts with:', apiKey?.substring(0, 10));
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -29,6 +30,8 @@ module.exports = async function handler(req, res) {
     });
 
     const data = await response.json();
+    console.log('Anthropic status:', response.status);
+    console.log('Anthropic error:', JSON.stringify(data?.error));
     return res.status(response.status).json(data);
   } catch (error) {
     return res.status(500).json({ error: error.message });
