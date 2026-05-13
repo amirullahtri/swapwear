@@ -36,12 +36,22 @@ module.exports = async function handler(req, res) {
     );
 
     const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, tidak bisa memproses permintaan.';
+    console.log('Gemini response:', JSON.stringify(data).substring(0, 500));
+
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if (!text) {
+      console.log('No text found, data keys:', Object.keys(data));
+      return res.status(200).json({
+        content: [{ type: 'text', text: 'Maaf, WEARBOT sedang tidak bisa menjawab. Coba lagi! 🙏' }]
+      });
+    }
 
     return res.status(200).json({
       content: [{ type: 'text', text }]
     });
   } catch (error) {
+    console.log('Error:', error.message);
     return res.status(500).json({ error: error.message });
   }
 }
