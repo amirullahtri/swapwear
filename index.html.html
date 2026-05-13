@@ -1028,7 +1028,7 @@ function exportCSV(){
 /* ═══════════════════════════════════════
    CLAUDE API
 ═══════════════════════════════════════ */
-const MODEL='claude-sonnet-4-20250514';
+const MODEL='claude-3-5-sonnet-20241022';
 const LISTINGS_CONTEXT=getListings().map(l=>`- ${l.name} (${l.cat}): Rp ${fmt(l.prices[3])}/3hr, Rp ${fmt(l.prices[5])}/5hr, Rp ${fmt(l.prices[7])}/7hr. Ukuran: ${l.sizes.join(',')}. Kota: ${l.city}. Rating: ${l.rating}. ${l.desc}`).join('\n');
 
 async function callClaude(messages,system,maxT=800){
