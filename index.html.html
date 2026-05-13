@@ -1028,11 +1028,11 @@ function exportCSV(){
 /* ═══════════════════════════════════════
    CLAUDE API
 ═══════════════════════════════════════ */
-const MODEL='claude-3-5-sonnet-20241022';
+const MODEL='claude-haiku-4-5-20251001';
 const LISTINGS_CONTEXT=getListings().map(l=>`- ${l.name} (${l.cat}): Rp ${fmt(l.prices[3])}/3hr, Rp ${fmt(l.prices[5])}/5hr, Rp ${fmt(l.prices[7])}/7hr. Ukuran: ${l.sizes.join(',')}. Kota: ${l.city}. Rating: ${l.rating}. ${l.desc}`).join('\n');
 
 async function callClaude(messages,system,maxT=800){
-  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:maxT,system,messages})});
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,max_tokens:maxT,system,messages})});
   const d=await r.json();
   return d.content.map(c=>c.text||'').join('');
 }
