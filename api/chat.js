@@ -5,48 +5,26 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
 
   try {
     let body = req.body;
     if (typeof body === 'string') body = JSON.parse(body);
 
-    const contents = body.messages.map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: typeof msg.content === 'string' ? msg.content : msg.content.map(c => c.text || '').join('') }]
-    }));
-
-    const geminiBody = {
-      contents,
-      generationConfig: { maxOutputTokens: body.max_tokens || 800 }
-    };
-
-    if (body.system) {
-      geminiBody.systemInstruction = { parts: [{ text: body.system }] };
-    }
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-002:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(geminiBody),
-      }
-    );
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify(body),
+    });
 
     const data = await response.json();
-    console.log('Status:', response.status, 'Error:', JSON.stringify(data.error));
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!text) {
-      return res.status(200).json({
-        content: [{ type: 'text', text: 'Maaf, WEARBOT sedang tidak bisa menjawab. Coba lagi!' }]
-      });
-    }
-
-    return res.status(200).json({ content: [{ type: 'text', text }] });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(response.status).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 }
