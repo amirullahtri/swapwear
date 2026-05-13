@@ -1,22 +1,8 @@
 {
-  "builds": [
-    {
-      "src": "api/chat.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "index.html.html",
-      "use": "@vercel/static"
+  "functions": {
+    "api/chat.js": {
+      "memory": 128,
+      "maxDuration": 30
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/chat",
-      "dest": "/api/chat.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html.html"
-    }
-  ]
+  }
 }
