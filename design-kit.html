@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=3.0"/>
+<title>SWAPWEAR × WEARBOT — Design Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--pk:#FF1F6E;--nv:#0D0B1F;--nv2:#120F2B;--lm:#C8FF00;--bd:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:#0a0a12}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:#fff;min-height:100vh;background:#0a0a12}
+
+/* ── TOP NAV ── */
+.topnav{background:#060610;border-bottom:1px solid var(--bd);padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}.logo span{color:var(--pk)}
+.wblogo{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:rgba(255,255,255,.5)}.wblogo span{color:var(--lm)}
+.day-tabs{display:flex;gap:.35rem;padding:.65rem 1rem;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--bd)}
+.day-tabs::-webkit-scrollbar{display:none}
+.dtab{padding:.4rem .85rem;border-radius:100px;font-size:.72rem;font-weight:600;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.35);white-space:nowrap;cursor:pointer;transition:all .15s;flex-shrink:0}
+.dtab.on{background:var(--pk);color:#fff;border-color:var(--pk)}
+
+/* ── DESIGN LIST ── */
+.design-list{padding:.75rem .75rem 5rem}
+.design-section{margin-bottom:1.5rem}
+.section-header{display:flex;align-items:center;gap:.5rem;padding:.5rem .25rem .6rem}
+.section-icon{font-size:1rem}
+.section-title{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.5)}
+.section-badge{font-size:.65rem;font-weight:600;background:rgba(255,31,110,.15);color:var(--pk);border:1px solid rgba(255,31,110,.25);border-radius:100px;padding:.15rem .5rem}
+
+/* ── DESIGN CARD ── */
+.dcard{background:#0D0B1F;border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:.75rem}
+.dcard-header{padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.dcard-title{font-size:.8rem;font-weight:600}
+.dcard-sub{font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+.dcard-type{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);border-radius:100px;padding:.2rem .55rem}
+
+/* ── CANVAS AREA ── */
+.canvas-wrap{position:relative;overflow:hidden;touch-action:none}
+.canvas-wrap.square{padding-top:100%}
+.canvas-wrap.portrait{padding-top:177.78%}
+.canvas-inner{position:absolute;inset:0;display:flex;flex-direction:column}
+
+/* ── SLIDE NAV ── */
+.slide-nav{display:flex;gap:.35rem;padding:.5rem .75rem;overflow-x:auto;scrollbar-width:none;background:rgba(0,0,0,.3)}
+.slide-nav::-webkit-scrollbar{display:none}
+.snav-btn{padding:.3rem .65rem;border-radius:100px;font-size:.62rem;font-weight:600;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.32);white-space:nowrap;cursor:pointer;flex-shrink:0}
+.snav-btn.on{background:var(--pk);color:#fff;border-color:var(--pk)}
+
+/* ── CAPTION BOX ── */
+.caption-box{padding:.75rem 1rem;background:#060610}
+.caption-toggle{width:100%;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:.75rem;font-weight:600;text-align:left;padding:.35rem 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.caption-text{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.65;margin:.5rem 0;white-space:pre-wrap;display:none}
+.caption-text.open{display:block}
+.hashtag-text{font-size:.72rem;color:var(--pk);line-height:1.7;display:none}
+.hashtag-text.open{display:block}
+.copy-row{display:flex;gap:.5rem;margin-top:.6rem}
+.copy-btn{flex:1;background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;text-align:center;transition:all .15s}
+.copy-btn:active{background:var(--pk);color:#fff;border-color:var(--pk)}
+
+/* ── SCREENSHOT TIP ── */
+.tip-bar{background:rgba(200,255,0,.08);border-top:1px solid rgba(200,255,0,.15);padding:.5rem .75rem;font-size:.68rem;color:var(--lm);display:flex;align-items:center;gap:.4rem}
+
+/* ── SLIDES ── */
+.slide{display:none;flex-direction:column;position:absolute;inset:0}
+.slide.on{display:flex}
+
+/* SHARED ELEMENTS */
+.logo-sm{font-family:'Syne',sans-serif;font-weight:800;font-size:14px}.logo-sm .w{color:var(--pk)}
+.wblogo-sm{font-family:'Syne',sans-serif;font-weight:800;font-size:14px}.wblogo-sm .b{color:var(--lm)}
+.pill{display:inline-flex;background:rgba(255,31,110,.17);border:1px solid rgba(255,31,110,.28);border-radius:100px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#FFB3CC;white-space:nowrap}
+.pill-lm{display:inline-flex;background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.22);border-radius:100px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--lm);white-space:nowrap}
+.dots-row{display:flex;gap:4px;align-items:center}
+.dot{height:3px;border-radius:2px;background:rgba(255,255,255,.16)}.dot.a{background:var(--pk)}
+.nc{width:22px;height:22px;border-radius:50%;background:var(--pk);font-family:'Syne',sans-serif;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nc-lm{width:22px;height:22px;border-radius:50%;background:var(--lm);color:var(--nv);font-family:'Syne',sans-serif;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ft{flex-shrink:0;padding-top:10px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06)}
+.wb-chips{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.wb-chip{background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.18);border-radius:100px;padding:2px 8px;font-size:9px;font-weight:600;color:var(--lm);white-space:nowrap}
+.cmp-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cmp-row:last-child{border-bottom:none}
+
+/* ── BOTTOM INFO BAR ── */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#060610;border-top:1px solid var(--bd);padding:.6rem 1rem;z-index:99;display:flex;align-items:center;justify-content:space-between}
+.bb-text{font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.4}
+.bb-count{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:var(--pk)}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="logo">SWAP<span>WEAR</span></div>
+  <div style="display:flex;align-items:center;gap:.35rem">
+    <span style="font-size:.65rem;color:rgba(255,255,255,.25)">×</span>
+    <div class="wblogo">WEAR<span>BOT</span></div>
+  </div>
+  <div style="font-size:.65rem;color:rgba(255,255,255,.25)">Design Kit</div>
+</div>
+
+<div class="day-tabs">
+  <button class="dtab on" onclick="filterDay('all',this)">Semua</button>
+  <button class="dtab" onclick="filterDay('1',this)">Hari 1</button>
+  <button class="dtab" onclick="filterDay('2',this)">Hari 2</button>
+  <button class="dtab" onclick="filterDay('3',this)">Hari 3</button>
+  <button class="dtab" onclick="filterDay('story',this)">Story 9:16</button>
+</div>
+
+<div class="design-list" id="design-list">
+
+  <!-- ════ HARI 1 ════ -->
+  <div class="design-section" data-day="1">
+    <div class="section-header">
+      <span class="section-icon">🌅</span>
+      <span class="section-title">Hari 1 Pagi</span>
+      <span class="section-badge">5 slide</span>
+    </div>
+
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Problem + WEARBOT Tease</div><div class="dcard-sub">Carousel · Slide 5 = WEARBOT reveal</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="slide-nav">
+        <button class="snav-btn on" onclick="gs('c1',1,this)">Slide 1</button>
+        <button class="snav-btn" onclick="gs('c1',2,this)">Slide 2</button>
+        <button class="snav-btn" onclick="gs('c1',3,this)">Slide 3</button>
+        <button class="snav-btn" onclick="gs('c1',4,this)">Slide 4</button>
+        <button class="snav-btn" onclick="gs('c1',5,this)">⭐ Slide 5 WEARBOT</button>
+      </div>
+      <div class="canvas-wrap square" id="cv-c1">
+        <div class="canvas-inner">
+
+          <div class="slide on" id="c1-1" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;text-align:center">
+              <span class="pill">🇮🇩 Launching · Bandung · Juli 2026</span>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(40px,13vw,64px);font-weight:800;color:var(--pk);line-height:1">Rp 1,5jt</div>
+              <div style="font-size:clamp(11px,3.5vw,17px);color:rgba(255,255,255,.38)">untuk 3 jam pemakaian.</div>
+              <div style="width:30px;height:2px;background:var(--pk)"></div>
+              <div style="font-size:clamp(10px,3.2vw,15px);color:rgba(255,255,255,.55);line-height:1.5;max-width:80%">Gaun wisuda yang sudah di lemari 2 tahun. Belum disentuh sejak acara selesai.</div>
+            </div>
+            <div class="ft"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><div class="dots-row"><div class="dot a" style="width:18px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div></div></div>
+          </div>
+
+          <div class="slide" id="c1-2" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:3%">
+              <div style="font-size:clamp(8px,2.5vw,11px);color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase">Fakta mengejutkan</div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(60px,19vw,96px);font-weight:800;color:var(--lm);line-height:1">78%</div>
+              <div style="font-size:clamp(11px,3.5vw,17px);font-weight:600;color:#fff;line-height:1.3">baju wisuda tidak pernah dipakai lagi setelah acara</div>
+              <div style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.38);line-height:1.6">Dead capital di lemari jutaan mahasiswa Indonesia.</div>
+              <div style="background:rgba(200,255,0,.06);border:1px solid rgba(200,255,0,.13);border-radius:8px;padding:10px 12px;align-self:flex-start"><div style="font-family:'Syne',sans-serif;font-size:clamp(13px,4vw,17px);font-weight:800;color:var(--lm)">Rp 12jt</div><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.32)">rata-rata terbuang / tahun</div></div>
+            </div>
+            <div class="ft"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><div class="dots-row"><div class="dot" style="width:6px"></div><div class="dot a" style="width:18px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div></div></div>
+          </div>
+
+          <div class="slide" id="c1-3" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0">
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(13px,4vw,20px);font-weight:800;margin-bottom:4%">Kalkulasi outfit selama kuliah 🧮</div>
+              <div style="display:flex;justify-content:space-between;padding:3% 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.48)">Gaun / Jas wisuda</span><span style="font-family:'Syne',sans-serif;font-size:clamp(10px,3vw,14px);font-weight:700">Rp 1.500.000</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3% 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.48)">Kebaya kondangan (3×)</span><span style="font-family:'Syne',sans-serif;font-size:clamp(10px,3vw,14px);font-weight:700">Rp 2.400.000</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3% 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.48)">Outfit formal lainnya</span><span style="font-family:'Syne',sans-serif;font-size:clamp(10px,3vw,14px);font-weight:700">Rp 1.200.000</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3% 4%;background:rgba(255,31,110,.1);border:1px solid rgba(255,31,110,.17);border-radius:8px;margin-top:4%"><span style="font-size:clamp(9px,2.8vw,12px);font-weight:600;color:#FFB3CC">Total terbuang</span><span style="font-family:'Syne',sans-serif;font-size:clamp(12px,3.5vw,18px);font-weight:800;color:var(--pk)">Rp 5.100.000</span></div>
+            </div>
+            <div class="ft"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><div class="dots-row"><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot a" style="width:18px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div></div></div>
+          </div>
+
+          <div class="slide" id="c1-4" style="background:var(--nv2);padding:6% 8%;justify-content:space-between">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;text-align:center">
+              <div style="font-size:clamp(36px,12vw,52px)">🤔</div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(15px,5vw,25px);font-weight:800;line-height:1.2;max-width:85%">Gimana kalau kamu bisa <span style="color:var(--pk)">tampil sama bagusnya</span> tanpa beli?</div>
+              <div style="font-size:clamp(10px,3.2vw,14px);color:rgba(255,255,255,.38);max-width:80%;line-height:1.6">Sewa outfit impian. Hemat hingga 90%.</div>
+              <div style="background:rgba(255,31,110,.1);border:1px solid rgba(255,31,110,.17);border-radius:8px;padding:2.5% 5%;font-size:clamp(9px,2.8vw,12px);color:#FFB3CC">Ada yang lebih dari sekedar sewa — swipe →</div>
+            </div>
+            <div class="ft"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><div class="dots-row"><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot" style="width:6px"></div><div class="dot a" style="width:18px"></div><div class="dot" style="width:6px"></div></div></div>
+          </div>
+
+          <div class="slide" id="c1-5" style="background:var(--nv);padding:6% 8%;align-items:center;justify-content:space-between;text-align:center">
+            <div style="display:flex;align-items:center;gap:6px;justify-content:center;flex-shrink:0">
+              <div class="logo-sm">SWAP<span class="w">WEAR</span></div>
+              <span style="color:rgba(255,255,255,.25);font-size:11px">×</span>
+              <div class="wblogo-sm">WEAR<span class="b">BOT</span></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%">
+              <div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase">Introducing</div>
+              <div style="background:rgba(200,255,0,.06);border:1px solid rgba(200,255,0,.15);border-radius:12px;padding:4% 5%;width:100%">
+                <div style="font-size:clamp(8px,2.5vw,10px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lm);margin-bottom:4px">🤖 WEARBOT — AI Fashion Assistant</div>
+                <div style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.65);line-height:1.5">AI personal stylist pertama Indonesia dalam fashion rental platform.</div>
+              </div>
+              <div class="wb-chips"><span class="wb-chip">✨ Style AI</span><span class="wb-chip">🎯 Occasion</span><span class="wb-chip">💰 Calculator</span><span class="wb-chip">📊 Pricing</span><span class="wb-chip">🔍 Damage</span><span class="wb-chip">📏 Size</span><span class="wb-chip">📈 Trend</span><span class="wb-chip">✍️ Content</span></div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(11px,3.5vw,13px);font-weight:800;color:var(--lm)">Tidak ada di fashion app manapun.</div>
+            </div>
+            <div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.22);flex-shrink:0">Hanya di swapwear.id</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot area desain di atas · Crop tepat di batas gambar</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap1')">📝 Caption + Hashtag <span id="cap1-arr">▼</span></button>
+        <div class="caption-text" id="cap1-text">Jujur dulu — berapa yang udah kamu keluarin buat baju yang cuma dipakai sekali? 🤔
+
+Gaun wisuda. Jas sidang. Kebaya kondangan. Batik prewed.
+
+Kalau ditotal, angkanya lebih dari yang kamu kira. Dan parahnya — semua itu sekarang numpuk di lemari.
+
+Tapi ada solusinya. Swipe sampai slide terakhir 👉
+
+SWAPWEAR — fashion rental + WEARBOT AI. Launching Juli 2026.
+
+Daftar waitlist gratis di swapwear.id 🔗 (link di bio)</div>
+        <div class="hashtag-text" id="cap1-tags">#swapwear #wearbot #mahasiswa #wisuda2026 #gaunwisuda #fashionrental #sewabaju #bandung #ITB #startupindonesia #sustainablefashion #circularfashion #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap1-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap1-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap1-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D1 PM -->
+  <div class="design-section" data-day="1">
+    <div class="section-header">
+      <span class="section-icon">🌙</span>
+      <span class="section-title">Hari 1 Malam</span>
+    </div>
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">WEARBOT Reveal</div><div class="dcard-sub">Kenalan sama AI pertama fashion rental</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="canvas-wrap square">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex-shrink:0;display:flex;justify-content:space-between;align-items:center;margin-bottom:3%">
+              <div class="wblogo-sm">WEAR<span class="b">BOT</span></div>
+              <span class="pill-lm">by SWAPWEAR</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:3%">
+              <div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase">Introducing</div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(22px,7vw,34px);font-weight:800;line-height:1">WEAR<span style="color:var(--lm)">BOT</span> —<br/>AI-mu untuk<br/>fashion rental.</div>
+              <div style="font-size:clamp(9px,2.8vw,12px);color:rgba(255,255,255,.45);line-height:1.55;max-width:90%">Bukan sekadar marketplace. AI pertama Indonesia yang nemenin kamu dari pilih outfit sampai cek kondisi barang.</div>
+              <div style="display:flex;flex-direction:column;gap:2.5%">
+                <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:2.5% 3%"><span style="font-size:12px;flex-shrink:0">✨</span><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.65);line-height:1.35"><b style="color:#fff">Style AI</b> — Ceritakan acaramu, AI rekomendasikan outfit</div></div>
+                <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:2.5% 3%"><span style="font-size:12px;flex-shrink:0">📏</span><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.65);line-height:1.35"><b style="color:#fff">Size Matching</b> — AI temukan fit sempurna dari ukuranmu</div></div>
+                <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:2.5% 3%"><span style="font-size:12px;flex-shrink:0">💰</span><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.65);line-height:1.35"><b style="color:#fff">Wardrobe Calculator</b> — Hitung potensi penghasilan lemarimu</div></div>
+              </div>
+            </div>
+            <div class="ft"><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.28)">8 fitur · Tidak ada di app lain</div><div style="font-family:'Syne',sans-serif;font-size:clamp(9px,3vw,12px);font-weight:800;color:var(--lm)">swapwear.id →</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot area desain · Upload ke IG Feed</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap2')">📝 Caption + Hashtag <span id="cap2-arr">▼</span></button>
+        <div class="caption-text" id="cap2-text">Perkenalkan — WEARBOT. 🤖✨
+
+Bukan sekadar marketplace sewa baju. SWAPWEAR hadir dengan AI fashion assistant pertama Indonesia.
+
+WEARBOT bisa:
+→ Rekomendasikan outfit berdasarkan acaramu
+→ Temukan size yang paling pas dari ukuran tubuhmu
+→ Hitung berapa penghasilan potensial dari lemarimu
+→ Dan 5 fitur AI lainnya
+
+Tidak ada di fashion app manapun. Hanya di swapwear.id 🇮🇩
+
+Daftar waitlist gratis — link di bio.</div>
+        <div class="hashtag-text" id="cap2-tags">#swapwear #wearbot #AIstyle #fashionrental #mahasiswa #wisuda2026 #styleai #sewabaju #bandung #ITB #startupindonesia #fashiontech #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap2-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap2-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap2-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ HARI 2 ════ -->
+  <div class="design-section" data-day="2">
+    <div class="section-header">
+      <span class="section-icon">🌅</span>
+      <span class="section-title">Hari 2 Pagi</span>
+    </div>
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">WEARBOT Style AI Demo</div><div class="dcard-sub">Showcase chat interface live</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="canvas-wrap square">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex-shrink:0;display:flex;justify-content:space-between;align-items:center;margin-bottom:3%">
+              <div style="display:flex;align-items:center;gap:5px"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><span style="color:rgba(255,255,255,.25);font-size:10px">×</span><div class="wblogo-sm">WEAR<span class="b">BOT</span></div></div>
+              <span class="pill-lm">✨ Style AI</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:clamp(14px,4.5vw,21px);font-weight:800;line-height:1.1;margin-bottom:3%;flex-shrink:0">Gak tau mau pakai apa?<br/>Tanya <span style="color:var(--lm)">WEARBOT.</span></div>
+            <div style="background:rgba(200,255,0,.05);border:1px solid rgba(200,255,0,.15);border-radius:10px;padding:4%;flex:1;display:flex;flex-direction:column;gap:3%">
+              <div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lm);margin-bottom:1%">🤖 WEARBOT Live Demo</div>
+              <div style="align-self:flex-end;background:var(--pk);color:#fff;border-radius:10px 10px 2px 10px;padding:3% 4%;font-size:clamp(9px,2.8vw,11px);max-width:85%;line-height:1.4">Wisuda outdoor ITB, siang hari, size M, budget Rp 200K, suka earth tone 🎓</div>
+              <div style="align-self:flex-start;background:rgba(255,255,255,.07);color:rgba(255,255,255,.85);border-radius:10px 10px 10px 2px;padding:3% 4%;font-size:clamp(8px,2.5vw,10px);max-width:92%;line-height:1.45">Halo! Untuk wisuda outdoor kamu:<br/><br/><span style="color:var(--lm);font-weight:600">1. Kebaya Modern Sage</span> — breathable, Rp 150K ⭐<br/><span style="color:var(--lm);font-weight:600">2. Midi Dress Terracotta</span> — earth tone, Rp 180K<br/><span style="color:var(--lm);font-weight:600">3. Batik Soft Brown</span> — elegant, Rp 200K</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,31,110,.09);border:1px solid rgba(255,31,110,.17);border-radius:8px;padding:2.5% 3%;flex-shrink:0;margin-top:3%">
+              <div style="font-size:clamp(8px,2.5vw,11px);color:rgba(255,255,255,.55)">Coba Style AI gratis</div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(9px,2.8vw,11px);font-weight:800;color:var(--lm)">swapwear.id →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Feed</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap3')">📝 Caption + Hashtag <span id="cap3-arr">▼</span></button>
+        <div class="caption-text" id="cap3-text">POV: kamu bingung mau pakai apa buat wisuda — terus kamu ketemu WEARBOT. 🤖👗
+
+Tinggal ceritain:
+- Acaranya apa
+- Size kamu berapa
+- Budget berapa
+- Suka warna apa
+
+WEARBOT langsung kurasi outfit terbaik dari koleksi SWAPWEAR yang tersedia.
+
+Real AI. Real-time. Tidak ada di fashion app manapun.
+
+Coba gratis di swapwear.id ✨ (link di bio)</div>
+        <div class="hashtag-text" id="cap3-tags">#swapwear #wearbot #styleai #gaunwisuda #wisuda2026 #fashionrental #mahasiswi #AIoutfit #sewabaju #bandung #ITB #personalstyle #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap3-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap3-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap3-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="design-section" data-day="2">
+    <div class="section-header">
+      <span class="section-icon">🌙</span>
+      <span class="section-title">Hari 2 Malam</span>
+    </div>
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">8 Fitur WEARBOT</div><div class="dcard-sub">Tidak ada di app lain manapun</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="canvas-wrap square">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:5% 6%;justify-content:space-between">
+            <div style="flex-shrink:0;display:flex;justify-content:space-between;align-items:center;margin-bottom:2%">
+              <div class="wblogo-sm">WEAR<span class="b">BOT</span></div>
+              <span class="pill-lm">Hanya di SWAPWEAR</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:clamp(14px,4.5vw,21px);font-weight:800;line-height:1.1;margin-bottom:2%;flex-shrink:0">8 fitur AI yang <span style="color:var(--lm)">tidak ada</span> di app lain manapun.</div>
+            <div style="font-size:clamp(8px,2.5vw,11px);color:rgba(255,255,255,.42);margin-bottom:3%;flex-shrink:0">Fashion rental lain: browse, pilih, sewa. SWAPWEAR: jauh lebih dari itu.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2%;flex:1;align-content:start">
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">✨</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Style AI</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Personal stylist</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">🎯</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Occasion AI</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Kurasi by event</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">💰</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Wardrobe Calc</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Estimasi earning</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">📊</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">AI Pricing</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Harga optimal</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">🔍</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Damage Detect</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Vision AI</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">📏</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Size Matching</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Fit by ukuran</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">📈</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Trend Forecast</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Prediksi demand</div></div></div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:3%;display:flex;align-items:flex-start;gap:5px"><span style="font-size:12px;flex-shrink:0;margin-top:1px">✍️</span><div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:600;color:#fff;margin-bottom:1px">Content Gen</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">Auto-write</div></div></div>
+            </div>
+            <div style="background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:8px;padding:3%;display:flex;align-items:center;gap:6px;flex-shrink:0;margin-top:3%">
+              <span style="font-size:13px">🏆</span>
+              <div><div style="font-size:clamp(8px,2.5vw,11px);font-weight:700;color:var(--lm)">Moat kompetitif — tidak ada duplikasinya</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.4)">swapwear.id · Daftar waitlist gratis</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Feed</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap4')">📝 Caption + Hashtag <span id="cap4-arr">▼</span></button>
+        <div class="caption-text" id="cap4-text">Ini yang bikin SWAPWEAR beda dari semua fashion rental yang ada. 👇
+
+WEARBOT — 8 fitur AI yang tidak ada di app manapun:
+
+✨ Style AI — personal stylist real-time
+🎯 Occasion Intelligence — kurasi outfit by event
+💰 Wardrobe Calculator — hitung earning lemarimu
+📊 AI Pricing — harga sewa optimal
+🔍 Damage Detection — vision AI cek kondisi
+📏 Size Matching — fit dari ukuran tubuhmu
+📈 Trend Forecast — prediksi demand per kota
+✍️ Content Generator — auto-write listing
+
+Ini bukan sekadar marketplace. Ini ekosistem fashion rental + AI pertama Indonesia.
+
+swapwear.id — daftar waitlist gratis 🇮🇩</div>
+        <div class="hashtag-text" id="cap4-tags">#swapwear #wearbot #fashionAI #fashionrental #styleai #mahasiswa #startupindonesia #AItech #sewabaju #bandung #ITB #wisuda2026 #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap4-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap4-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap4-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ HARI 3 ════ -->
+  <div class="design-section" data-day="3">
+    <div class="section-header">
+      <span class="section-icon">🌅</span>
+      <span class="section-title">Hari 3 Pagi</span>
+    </div>
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">WEARBOT Wardrobe Calculator</div><div class="dcard-sub">Untuk lender — hitung potensi lemari</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="canvas-wrap square">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:6% 8%;justify-content:space-between">
+            <div style="flex-shrink:0;display:flex;justify-content:space-between;align-items:center;margin-bottom:3%">
+              <div class="wblogo-sm">WEAR<span class="b">BOT</span></div>
+              <span class="pill">💰 Wardrobe Calculator</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:clamp(15px,5vw,22px);font-weight:800;line-height:1.1;margin-bottom:2%;flex-shrink:0">Lemarimu lebih<br/>berharga dari<br/>yang kamu kira.</div>
+            <div style="font-size:clamp(9px,2.8vw,11px);color:rgba(255,255,255,.42);margin-bottom:3%;flex-shrink:0">WEARBOT hitung potensi penghasilan dari lemarimu dalam detik.</div>
+            <div style="background:rgba(200,255,0,.05);border:1px solid rgba(200,255,0,.15);border-radius:10px;padding:4%;flex:1;display:flex;flex-direction:column;gap:3%">
+              <div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lm);margin-bottom:1%">📸 Input Lemari</div>
+              <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:3%;font-size:clamp(8px,2.5vw,11px);color:rgba(255,255,255,.6)">1 kebaya putih · 2 gaun pesta · 1 jas navy · 3 batik set</div>
+              <div style="text-align:center;font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.28)">▼ WEARBOT menganalisis...</div>
+              <div style="background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:8px;padding:3% 4%">
+                <div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;text-transform:uppercase;color:var(--lm);margin-bottom:3%">💰 Estimasi / Bulan</div>
+                <div style="font-family:'Syne',sans-serif;font-size:clamp(20px,7vw,26px);font-weight:800;color:var(--lm);line-height:1">Rp 2–3jt</div>
+                <div style="margin-top:3%;display:flex;flex-direction:column;gap:2%">
+                  <div style="display:flex;justify-content:space-between;font-size:clamp(7px,2.2vw,9px)"><span style="color:rgba(255,255,255,.4)">Kebaya putih · 4–6×</span><span style="color:#fff;font-weight:600">Rp 600–900K</span></div>
+                  <div style="display:flex;justify-content:space-between;font-size:clamp(7px,2.2vw,9px)"><span style="color:rgba(255,255,255,.4)">Gaun pesta · 3–5×</span><span style="color:#fff;font-weight:600">Rp 720K–1.1jt</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="ft"><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.28)">DM "LENDER" · Gratis</div><div style="font-family:'Syne',sans-serif;font-size:clamp(9px,3vw,12px);font-weight:800;color:var(--lm)">swapwear.id →</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Feed</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap5')">📝 Caption + Hashtag <span id="cap5-arr">▼</span></button>
+        <div class="caption-text" id="cap5-text">Punya baju bagus yang jarang dipakai? WEARBOT bisa hitung berapa penghasilanmu. 💰
+
+Caranya simpel:
+1. Deskripsikan isi lemarimu ke WEARBOT
+2. AI analisis setiap item
+3. Dapat estimasi penghasilan bulanan
+
+Lemari dengan 5–7 item bisa menghasilkan Rp 2–3 juta per bulan — dari baju yang selama ini cuma makan tempat.
+
+Coba WEARBOT Wardrobe Calculator di swapwear.id 🤖
+
+DM "LENDER" untuk daftar jadi lender pertama kami 🏷️</div>
+        <div class="hashtag-text" id="cap5-tags">#swapwear #wearbot #lender #passiveincome #wardrobecalculator #fashionrental #uangpassif #mahasiswa #sewabaju #sideincome #bandung #ITB #startupindonesia #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap5-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap5-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap5-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="design-section" data-day="3">
+    <div class="section-header">
+      <span class="section-icon">🌙</span>
+      <span class="section-title">Hari 3 Malam</span>
+    </div>
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Full Ecosystem CTA</div><div class="dcard-sub">SWAPWEAR + WEARBOT = complete</div></div>
+        <span class="dcard-type">Feed 1:1</span>
+      </div>
+      <div class="canvas-wrap square">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv2);padding:6% 8%;justify-content:space-between">
+            <div style="flex-shrink:0;display:flex;justify-content:space-between;align-items:center;margin-bottom:3%">
+              <div style="display:flex;align-items:center;gap:5px"><div class="logo-sm">SWAP<span class="w">WEAR</span></div><span style="color:rgba(255,255,255,.25);font-size:10px">+</span><div class="wblogo-sm">WEAR<span class="b">BOT</span></div></div>
+              <span class="pill-lm">Complete Ecosystem</span>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:clamp(16px,5vw,24px);font-weight:800;line-height:1.1;margin-bottom:3%;flex-shrink:0">Satu platform.<br/>Dua kekuatan.<br/><span style="color:var(--lm)">Tanpa tandingan.</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3%;flex:1;align-content:start">
+              <div style="background:rgba(255,31,110,.1);border:1px solid rgba(255,31,110,.2);border-radius:10px;padding:4%;display:flex;flex-direction:column;gap:3%"><div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;text-transform:uppercase;color:var(--pk)">SWAPWEAR</div><div style="font-size:clamp(11px,3.5vw,13px);font-weight:700;color:#fff;line-height:1.2">P2P Fashion Rental</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.45);line-height:1.4">Browse, booking, delivery, return</div></div>
+              <div style="background:rgba(200,255,0,.07);border:1px solid rgba(200,255,0,.18);border-radius:10px;padding:4%;display:flex;flex-direction:column;gap:3%"><div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;text-transform:uppercase;color:var(--lm)">WEARBOT</div><div style="font-size:clamp(11px,3.5vw,13px);font-weight:700;color:#fff;line-height:1.2">AI Fashion Assistant</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.45);line-height:1.4">8 fitur AI — pertama Indonesia</div></div>
+              <div style="background:rgba(255,31,110,.1);border:1px solid rgba(255,31,110,.2);border-radius:10px;padding:4%;display:flex;flex-direction:column;gap:3%"><div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;text-transform:uppercase;color:var(--pk)">RENTER</div><div style="font-size:clamp(11px,3.5vw,13px);font-weight:700;color:#fff;line-height:1.2">Sewa + AI</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.45);line-height:1.4">Outfit + WEARBOT guide</div></div>
+              <div style="background:rgba(200,255,0,.07);border:1px solid rgba(200,255,0,.18);border-radius:10px;padding:4%;display:flex;flex-direction:column;gap:3%"><div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;text-transform:uppercase;color:var(--lm)">LENDER</div><div style="font-size:clamp(11px,3.5vw,13px);font-weight:700;color:#fff;line-height:1.2">Earn + AI</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.45);line-height:1.4">Pricing, content & damage</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--pk);border-radius:9px;padding:3% 4%;flex-shrink:0;margin-top:3%">
+              <div><div style="font-size:clamp(9px,3vw,12px);font-weight:700;color:#fff">Daftar waitlist sekarang</div><div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.65);margin-top:1px">Gratis · WEARBOT included 🤖</div></div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(10px,3.2vw,14px);font-weight:800;color:#fff">swapwear.id →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Feed</div>
+      <div class="caption-box">
+        <button class="caption-toggle" onclick="toggleCap('cap6')">📝 Caption + Hashtag <span id="cap6-arr">▼</span></button>
+        <div class="caption-text" id="cap6-text">SWAPWEAR bukan sekadar marketplace sewa baju. 🚀
+
+Ini adalah ekosistem lengkap:
+
+SWAPWEAR — platform P2P fashion rental pertama Indonesia
++ WEARBOT — AI fashion assistant dengan 8 fitur eksklusif
+
+Untuk renter: sewa outfit + WEARBOT bantu styling dari awal
+Untuk lender: dapat passive income + AI urus pricing, content, damage detection
+
+Tidak ada platform fashion di Indonesia yang menawarkan kombinasi ini.
+
+Daftar waitlist sekarang di swapwear.id — gratis, WEARBOT included 🤖🇮🇩</div>
+        <div class="hashtag-text" id="cap6-tags">#swapwear #wearbot #fashionrental #styleai #mahasiswa #startupindonesia #wisuda2026 #sewabaju #passiveincome #lender #bandung #ITB #fashiontech #fypindonesia #fyp</div>
+        <div class="copy-row" id="cap6-btns" style="display:none">
+          <button class="copy-btn" onclick="cp('cap6-text',this)">📋 Copy Caption</button>
+          <button class="copy-btn" onclick="cp('cap6-tags',this)">📋 Copy Hashtag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ STORIES ════ -->
+  <div class="design-section" data-day="story">
+    <div class="section-header">
+      <span class="section-icon">📱</span>
+      <span class="section-title">Story / TikTok 9:16</span>
+      <span class="section-badge">6 story</span>
+    </div>
+
+    <!-- Story 1 -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 1 Pagi · Poll</div><div class="dcard-sub">Engagement story pertama</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0"><div class="logo-sm" style="font-size:17px">SWAP<span class="w">WEAR</span></div><span class="pill">📊 Quick Poll</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;width:100%">
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(16px,5.5vw,22px);font-weight:800;line-height:1.25;max-width:85%">Berapa yang kamu habiskan untuk outfit wisuda?</div>
+              <div style="display:flex;flex-direction:column;gap:3%;width:100%">
+                <div style="padding:3.5% 5%;border-radius:100px;font-size:clamp(11px,3.5vw,14px);font-weight:600;border:1.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);text-align:center">A. Kurang dari Rp 500K</div>
+                <div style="padding:3.5% 5%;border-radius:100px;font-size:clamp(11px,3.5vw,14px);font-weight:700;background:var(--pk);color:#fff;text-align:center">B. Rp 500K – Rp 1,5 juta</div>
+                <div style="padding:3.5% 5%;border-radius:100px;font-size:clamp(11px,3.5vw,14px);font-weight:600;border:1.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);text-align:center">C. Lebih dari Rp 1,5 juta</div>
+              </div>
+              <div style="font-size:clamp(10px,3.2vw,12px);color:rgba(255,255,255,.3);max-width:85%;line-height:1.55">Besok ada sesuatu yang belum pernah ada di fashion app manapun 👀</div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">swapwear.id · Swipe up untuk waitlist ↑</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 1 Malam · WEARBOT Tease</div><div class="dcard-sub">Introduce WEARBOT</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:linear-gradient(150deg,#0D0B1F,#0A180A);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0"><div class="logo-sm" style="font-size:17px">SWAP<span class="w">WEAR</span></div><span class="pill-lm">🤖 Introducing</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%">
+              <div style="font-size:clamp(40px,14vw,56px)">🤖</div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(18px,6vw,26px);font-weight:800;line-height:1.15;max-width:85%">Kenalan sama <span style="color:var(--lm)">WEARBOT.</span></div>
+              <div style="font-size:clamp(10px,3.2vw,13px);color:rgba(255,255,255,.4);max-width:85%;line-height:1.6">AI personal stylist pertama Indonesia. Terintegrasi langsung dalam fashion rental.</div>
+              <div class="wb-chips"><span class="wb-chip">✨ Style AI</span><span class="wb-chip">📏 Size Fit</span><span class="wb-chip">💰 Calculator</span><span class="wb-chip">🔍 Damage</span><span class="wb-chip">📈 Trend</span></div>
+              <div style="background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:10px;padding:3.5% 6%"><div style="font-family:'Syne',sans-serif;font-size:clamp(14px,4.5vw,18px);font-weight:800;color:var(--lm)">swapwear.id</div><div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.22);margin-top:2px">Daftar waitlist gratis</div></div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">Tidak ada di fashion app manapun 🇮🇩</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+    <!-- Story 3: vs Others -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 2 Pagi · WEARBOT vs App Lain</div><div class="dcard-sub">Comparison table</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0"><div class="wblogo-sm" style="font-size:17px">WEAR<span class="b">BOT</span></div><span class="pill-lm">Perbandingan</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;width:100%">
+              <div style="font-size:clamp(10px,3.2vw,13px);color:rgba(255,255,255,.38)">Fashion rental lain vs SWAPWEAR</div>
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:4%;width:100%">
+                <div style="display:flex;gap:8px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:6px">
+                  <div style="flex:1;font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.28)">Fitur</div>
+                  <div style="width:44px;text-align:center;font-size:clamp(7px,2.2vw,8px);font-weight:700;color:var(--pk)">SWAP<br/>WEAR</div>
+                  <div style="width:44px;text-align:center;font-size:clamp(7px,2.2vw,8px);font-weight:700;color:rgba(255,255,255,.25)">App<br/>Lain</div>
+                </div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:rgba(255,255,255,.55)">Browse & booking</div><div style="width:44px;text-align:center;font-size:12px">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">✅</div></div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:var(--lm)">AI Style Rec.</div><div style="width:44px;text-align:center;font-size:12px;color:var(--lm)">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">❌</div></div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:var(--lm)">AI Size Matching</div><div style="width:44px;text-align:center;font-size:12px;color:var(--lm)">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">❌</div></div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:var(--lm)">Damage Detection</div><div style="width:44px;text-align:center;font-size:12px;color:var(--lm)">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">❌</div></div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:var(--lm)">Wardrobe Calc</div><div style="width:44px;text-align:center;font-size:12px;color:var(--lm)">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">❌</div></div>
+                <div class="cmp-row"><div style="flex:1;font-size:clamp(9px,2.8vw,11px);color:var(--lm)">Trend Forecast</div><div style="width:44px;text-align:center;font-size:12px;color:var(--lm)">✅</div><div style="width:44px;text-align:center;font-size:12px;color:rgba(255,255,255,.22)">❌</div></div>
+              </div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(13px,4.5vw,16px);font-weight:800;color:var(--lm)">WEARBOT = moat kompetitif.</div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">swapwear.id · Hanya di sini</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+    <!-- Story 4: Price -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 2 Malam · Price + WEARBOT</div><div class="dcard-sub">Hemat + bonus AI</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:var(--nv);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="flex-shrink:0"><div class="logo-sm" style="font-size:17px">SWAP<span class="w">WEAR</span></div></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;width:100%">
+              <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.08em">Outfit wisuda yang sama persis</div>
+              <div style="display:flex;align-items:stretch;gap:3%;width:100%">
+                <div style="flex:1;background:rgba(226,75,74,.09);border:1px solid rgba(226,75,74,.22);border-radius:12px;padding:5% 3%;display:flex;flex-direction:column;align-items:center;gap:3px">
+                  <div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#E24B4A">BELI</div>
+                  <div style="font-family:'Syne',sans-serif;font-size:clamp(16px,5.5vw,22px);font-weight:800;color:#E24B4A;line-height:1">Rp 2jt</div>
+                  <div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.28)">Sekali pakai</div>
+                </div>
+                <div style="font-family:'Syne',sans-serif;font-size:clamp(12px,4vw,16px);font-weight:800;color:rgba(255,255,255,.18);display:flex;align-items:center">VS</div>
+                <div style="flex:1;background:rgba(200,255,0,.06);border:1px solid rgba(200,255,0,.18);border-radius:12px;padding:5% 3%;display:flex;flex-direction:column;align-items:center;gap:3px">
+                  <div style="font-size:clamp(7px,2.2vw,9px);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lm)">SEWA</div>
+                  <div style="font-family:'Syne',sans-serif;font-size:clamp(16px,5.5vw,22px);font-weight:800;color:var(--lm);line-height:1">Rp 180K</div>
+                  <div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.28)">+ WEARBOT gratis</div>
+                </div>
+              </div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(32px,11vw,44px);font-weight:800;color:var(--lm);line-height:1">Hemat 91%</div>
+              <div style="background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:10px;padding:3.5% 5%;width:100%">
+                <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.45);margin-bottom:3px">WEARBOT bonus gratis:</div>
+                <div style="font-size:clamp(9px,3vw,11px);color:var(--lm);font-weight:600">✨ Style AI + 📏 Size Match + 🎯 Occasion AI</div>
+              </div>
+              <div style="background:var(--pk);border-radius:100px;padding:3.5% 7%;font-size:clamp(11px,3.5vw,14px);font-weight:700;color:#fff;width:100%;text-align:center">Daftar di swapwear.id →</div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">Gratis · Launching Juli 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+    <!-- Story 5: Lender -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 3 Pagi · Lender + WEARBOT</div><div class="dcard-sub">Passive income angle</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:linear-gradient(160deg,#0D0B1F,#080F08);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0"><div class="wblogo-sm" style="font-size:17px">WEAR<span class="b">BOT</span></div><span class="pill">untuk Lender 🏷️</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;width:100%">
+              <div style="font-size:clamp(10px,3.2vw,13px);color:rgba(255,255,255,.38);max-width:85%;line-height:1.55">Jadi lender SWAPWEAR — WEARBOT yang urus semua yang ribet</div>
+              <div style="background:rgba(200,255,0,.07);border:1px solid rgba(200,255,0,.17);border-radius:12px;padding:5%;width:100%">
+                <div style="font-family:'Syne',sans-serif;font-size:clamp(32px,11vw,44px);font-weight:800;color:var(--lm);line-height:1">Rp 2–3jt</div>
+                <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.32);margin-top:3px">estimasi per bulan · 5–10 item</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:3%;width:100%;text-align:left">
+                <div style="display:flex;align-items:center;gap:8px"><div class="nc-lm">1</div><div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.6)">Foto item → WEARBOT tulis deskripsi otomatis</div></div>
+                <div style="display:flex;align-items:center;gap:8px"><div class="nc-lm">2</div><div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.6)">WEARBOT rekomendasikan harga optimal</div></div>
+                <div style="display:flex;align-items:center;gap:8px"><div class="nc-lm">3</div><div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.6)">AI cek kondisi barang setelah sewa</div></div>
+              </div>
+              <div style="background:var(--lm);border-radius:100px;padding:3.5% 7%;font-size:clamp(11px,3.5vw,13px);font-weight:700;color:var(--nv);width:100%;text-align:center">DM "LENDER" atau daftar di swapwear.id</div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">Zero commission bulan pertama · Early lender</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+    <!-- Story 6: Final CTA -->
+    <div class="dcard">
+      <div class="dcard-header">
+        <div><div class="dcard-title">Hari 3 Malam · Final CTA</div><div class="dcard-sub">Waitlist countdown</div></div>
+        <span class="dcard-type">Story 9:16</span>
+      </div>
+      <div class="canvas-wrap portrait">
+        <div class="canvas-inner">
+          <div class="slide on" style="background:linear-gradient(180deg,#120F2B,#0D0B1F);padding:5% 7%;flex-direction:column;justify-content:space-between;align-items:center;text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0">
+              <div style="display:flex;align-items:center;gap:5px;justify-content:center"><div class="logo-sm" style="font-size:15px">SWAP<span class="w">WEAR</span></div><span style="color:rgba(255,255,255,.25)">×</span><div class="wblogo-sm" style="font-size:15px">WEAR<span class="b">BOT</span></div></div>
+              <div style="font-size:clamp(7px,2.2vw,9px);color:rgba(255,255,255,.18);letter-spacing:.12em;text-transform:uppercase">P2P Fashion Rental + AI</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;width:100%">
+              <div style="background:rgba(200,255,0,.07);border:1px solid rgba(200,255,0,.17);border-radius:12px;padding:5%;width:100%">
+                <div style="font-family:'Syne',sans-serif;font-size:clamp(36px,12vw,48px);font-weight:800;color:var(--lm);line-height:1">247+</div>
+                <div style="font-size:clamp(9px,3vw,12px);color:rgba(255,255,255,.32);margin-top:4px">orang sudah daftar waitlist</div>
+              </div>
+              <div style="font-family:'Syne',sans-serif;font-size:clamp(14px,4.5vw,18px);font-weight:800;line-height:1.2;max-width:85%">Bergabung sebelum launch Juli 2026</div>
+              <div style="display:flex;flex-direction:column;gap:3%;width:100%">
+                <div style="background:var(--pk);border-radius:100px;padding:3.5% 7%;font-size:clamp(11px,3.5vw,14px);font-weight:700;color:#fff;text-align:center">👗 Daftar sebagai Renter</div>
+                <div style="background:var(--lm);border-radius:100px;padding:3.5% 7%;font-size:clamp(11px,3.5vw,14px);font-weight:700;color:var(--nv);text-align:center">🏷️ Daftar sebagai Lender</div>
+              </div>
+              <div>
+                <div style="font-family:'Syne',sans-serif;font-size:clamp(13px,4.5vw,16px);font-weight:800;color:var(--lm)">swapwear.id</div>
+                <div style="font-size:clamp(8px,2.5vw,10px);color:rgba(255,255,255,.18);margin-top:2px">Gratis · WEARBOT included 🤖</div>
+              </div>
+            </div>
+            <div style="font-size:clamp(9px,3vw,11px);color:rgba(255,255,255,.18);flex-shrink:0">Launching Bandung · Juli 2026 🇮🇩</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-bar">📸 Screenshot · Upload ke IG Story atau TikTok</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <div class="bb-text">SWAPWEAR × WEARBOT<br/>Design Kit · 12 konten</div>
+  <div class="bb-count" id="visible-count">12 konten</div>
+</div>
+
+<script>
+function filterDay(day, el) {
+  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  const sections = document.querySelectorAll('.design-section');
+  let visible = 0;
+  sections.forEach(s => {
+    const d = s.getAttribute('data-day');
+    const show = day === 'all' || d === day;
+    s.style.display = show ? 'block' : 'none';
+    if (show) visible += s.querySelectorAll('.dcard').length;
+  });
+  document.getElementById('visible-count').textContent = visible + ' konten';
+}
+
+function gs(prefix, num, btn) {
+  const card = btn.closest('.dcard');
+  card.querySelectorAll('.slide').forEach(s => s.classList.remove('on'));
+  document.getElementById(prefix + '-' + num).classList.add('on');
+  btn.closest('.slide-nav').querySelectorAll('.snav-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+function toggleCap(id) {
+  const txt = document.getElementById(id + '-text');
+  const tags = document.getElementById(id + '-tags');
+  const btns = document.getElementById(id + '-btns');
+  const arr = document.getElementById(id + '-arr');
+  const isOpen = txt.classList.contains('open');
+  txt.classList.toggle('open', !isOpen);
+  tags.classList.toggle('open', !isOpen);
+  btns.style.display = isOpen ? 'none' : 'flex';
+  arr.textContent = isOpen ? '▼' : '▲';
+}
+
+function cp(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.background = 'var(--lm)';
+    btn.style.color = 'var(--nv)';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
